@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include ('../partials/head.ejs') %>
+</head>
+
+<body class="grey darken-4 d-flex flex-column min-vh-100">
+
+   <!--Navbar -->
+ <nav class="mb-1 navbar navbar-expand-lg navbar-dark mdb-color darken-2 mb-0">
+  <a class="navbar-brand" href="/movies/">
+    <img style="width: 150px;" src="/images/logo.png" alt="" />
+  </a>
+</nav>
+<!--/.Navbar -->
+  <div class="container wrapper flex-grow-1">
+    <div class="jumbotron text-center mdb-color lighten-4 mt-5">
+      <h2 class="card-title h2 lang" key="error">Error</h2>
+      <div class="row d-flex justify-content-center">
+        <div class="col-xl-7 pb-2">
+          <p class="card-text">
+            <%= error %>
+          </p>
+          <p> <a href="/movies" class="lang" key="homeMsg">Home</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include ('../partials/scripts.ejs') %>
+</body>
+
+</html>

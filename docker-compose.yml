@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - /data/db
+    ports:
+      - "27017:27017"
+      
+  server:
+      build: 
+        context: ./server
+      container_name: 'server'
+      restart: 'always'
+      ports:
+        - "3000:3000"
+      links: 
+        - mongo
+      volumes:
+        - ./server:/server
+      entrypoint: tail -f /dev/null
+
+  client:
+      build:
+        context: ./client
+      container_name: 'client'
+      restart: 'always'
+      ports:
+        - "80:80"
+      links:
+        - server
+        - mongo
+      volumes:
+        - ./client:/client
+      entrypoint: tail -f /dev/null

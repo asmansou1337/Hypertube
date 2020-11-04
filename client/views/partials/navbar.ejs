@@ -1,0 +1,45 @@
+ <!--Navbar -->
+ <nav class="mb-1 navbar navbar-expand-lg navbar-dark mdb-color darken-2 mb-0">
+  <a class="navbar-brand" href="/movies/">
+    <img style="width: 150px;" src="/images/logo.png" alt="" />
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent-555"
+    aria-controls="navbarSupportedContent-555"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item avatar dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          id="navbarDropdownMenuLink-55"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+        <i class="fas fa-user-cog fa-lg"></i>
+        </a>
+        <div
+          class="dropdown-menu dropdown-menu-lg-right dropdown-ins"
+          aria-labelledby="navbarDropdownMenuLink-55"
+        >
+          <a class="dropdown-item lang" key="profile" href="/users/me">Profile</a>
+          <a class="dropdown-item lang" key="watchlist" href="/movies/watchlist">Watchlist</a>
+          <a class="dropdown-item lang" key="favorites" href="/movies/favorites">Favorites</a>
+          <a class="dropdown-item lang" key="watched" href="/movies/watched">Watched</a>
+          <a class="dropdown-item lang" key="change-password" href="/users/changePassword">Change Password</a>
+          <a class="dropdown-item lang" key="logout" href="/auth/logout">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--/.Navbar -->

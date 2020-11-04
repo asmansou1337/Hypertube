@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include ('../partials/head.ejs') %>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="grey darken-4 d-flex flex-column min-vh-100">
+
+  <%- include ('../partials/navbar') %>
+
+  <div class="container wrapper flex-grow-1">
+    <!-- container -->
+    <!-- Error & messages section -->
+    <div style="margin-top: 10px;" class="errorContainer">
+      <% if(typeof  error !== 'undefined' && error){ %>
+      <div class="card">
+        <div class="card-body danger-color">
+          <%=  error %>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
+    <!-- Search / Filter & Sort -->
+    <div class="modal fade w-100" id="modalOptions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog cascading-modal" role="document">
+        <div class="modal-content  grey darken-4">
+          <div class="modal-header mdb-color lighten-3">
+            <h4 class="title"><i class="fas fa-sliders-h"></i>&nbsp;<span class="lang" key="filter">Options</span></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="/movies/" method="post">
+            <div class="modal-body mx-3">
+              <div class="md-form my-0">
+                <input class="form-control" type="text" aria-label="Search" name="query_term"
+                  value="<%= (typeof filter !== 'undefined') ? ((filter.query_term.length > 0) ?  filter.query_term  : '') : '' %>">
+                <label for="Search"><i class="fas fa-search"></i>&nbsp;<span class="lang"
+                    key="search">Search</span></label>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="category" class="lang mdb-main-label" key="category">Category</label>
+                  <select class="mdb-select md-form my-0" name="genre">
+                    <option value="" disabled class="lang" key="category">Category</option>
+                    <option value="all" class="lang" key="all"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'all') ?  'selected'  : '') : '' %>>All
+                    </option>
+                    <option value="Action" class="lang" key="action"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Action') ?  'selected'  : '') : '' %>>
+                      Action</option>
+                    <option value="Adventure" class="lang" key="adventure"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Adventure') ?  'selected'  : '') : '' %>>
+                      Adventure</option>
+                    <option value="Animation" class="lang" key="animation"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Animation') ?  'selected'  : '') : '' %>>
+                      Animation</option>
+                    <option value="Biography" class="lang" key="biography"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Biography') ?  'selected'  : '') : '' %>>
+                      Biography</option>
+                    <option value="Comedy" class="lang" key="comedy"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Comedy') ?  'selected'  : '') : '' %>>
+                      Comedy</option>
+                    <option value="Crime" class="lang" key="crime"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Crime') ?  'selected'  : '') : '' %>>
+                      Crime</option>
+                    <option value="Documentary" class="lang" key="documentary"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Documentary') ?  'selected'  : '') : '' %>>
+                      Documentary</option>
+                    <option value="Drama" class="lang" key="drama"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Drama') ?  'selected'  : '') : '' %>>
+                      Drama</option>
+                    <option value="Family" class="lang" key="family"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Family') ?  'selected'  : '') : '' %>>
+                      Family</option>
+                    <option value="Fantasy" class="lang" key="fantasy"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Fantasy') ?  'selected'  : '') : '' %>>
+                      Fantasy</option>
+                    <option value="History" class="lang" key="history"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'History') ?  'selected'  : '') : '' %>>
+                      History</option>
+                    <option value="Horror" class="lang" key="horror"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Horror') ?  'selected'  : '') : '' %>>
+                      Horror</option>
+                    <option value="Music" class="lang" key="music"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Music') ?  'selected'  : '') : '' %>>
+                      Music</option>
+                    <option value="Musical" class="lang" key="musical"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Musical') ?  'selected'  : '') : '' %>>
+                      Musical</option>
+                    <option value="Mystery" class="lang" key="mystery"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Mystery') ?  'selected'  : '') : '' %>>
+                      Mystery</option>
+                    <option value="Romance" class="lang" key="romance"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Romance') ?  'selected'  : '') : '' %>>
+                      Romance</option>
+                    <option value="Sci-Fi" class="lang" key="sci-fi"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Sci-Fi') ?  'selected'  : '') : '' %>>
+                      Science Fiction</option>
+                    <option value="Sport" class="lang" key="sport"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Sport') ?  'selected'  : '') : '' %>>
+                      Sport</option>
+                    <option value="Thriller" class="lang" key="thriller"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Thriller') ?  'selected'  : '') : '' %>>
+                      Thriller</option>
+                    <option value="War" class="lang" key="war"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'War') ?  'selected'  : '') : '' %>>War
+                    </option>
+                    <option value="Western" class="lang" key="western"
+                      <%= (typeof filter !== 'undefined') ? ((filter.genre == 'Western') ?  'selected'  : '') : '' %>>
+                      Western</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="quality" class="lang mdb-main-label" key="film-quality">Quality</label>
+                  <select class="mdb-select md-form my-0" name="quality">
+                    <option value="" disabled class="lang" key="film-quality">Quality</option>
+                    <option value="all" class="lang" key="all"
+                      <%= (typeof filter !== 'undefined') ? ((filter.quality == 'all') ?  'selected'  : '') : '' %>>All
+                    </option>
+                    <option value="720p" class="lang" key="720"
+                      <%= (typeof filter !== 'undefined') ? ((filter.quality == '720p') ?  'selected'  : '') : '' %>>
+                      720p</option>
+                    <option value="1080p" class="lang" key="1080"
+                      <%= (typeof filter !== 'undefined') ? ((filter.quality == '1080p') ?  'selected'  : '') : '' %>>
+                      1080p</option>
+                    <option value="2160p" class="lang" key="2160"
+                      <%= (typeof filter !== 'undefined') ? ((filter.quality == '2160p') ?  'selected'  : '') : '' %>>
+                      2160p</option>
+                    <option value="3D" class="lang" key="3D"
+                      <%= (typeof filter !== 'undefined') ? ((filter.quality == '3D') ?  'selected'  : '') : '' %>>3D
+                    </option>
+                  </select>
+                </div>
+
+              </div>
+
+              <hr>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="sort" class="lang mdb-main-label" key="sort">Sort By</label>
+                  <select class="mdb-select md-form my-0" name="sort_by">
+                    <option value="title" class="lang" key="title"
+                      <%= (typeof filter !== 'undefined') ? ((filter.sort_by == 'title') ?  'selected'  : '') : '' %>>
+                      Title</option>
+                    <option value="year" class="lang" key="year"
+                      <%= (typeof filter !== 'undefined') ? ((filter.sort_by == 'year') ?  'selected'  : '') : '' %>>
+                      Year</option>
+                    <option value="rating" class="lang" key="rating"
+                      <%= (typeof filter !== 'undefined') ? ((filter.sort_by == 'rating') ?  'selected'  : '') : '' %>>
+                      Rating </option>
+                    <option value="trending" class="lang" key="trending"
+                      <%= (typeof filter !== 'undefined') ? ((filter.sort_by == 'trending') ?  'selected'  : '') : '' %>>
+                      Trending </option>
+                    <option value="peers" class="lang" key="peers"
+                      <%= (typeof filter !== 'undefined') ? ((filter.sort_by == 'peers') ?  'selected'  : '') : '' %>>
+                      Peers </option>
+                    <option value="download_count" class="lang" key="download-count"
+                      <%= (typeof filter !== 'undefined') ? ((filter.sort_by == 'download_count') ?  'selected'  : '') : '' %>>
+                      Downloads</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="order" class="lang mdb-main-label" key="order">Order By</label>
+                  <select class="mdb-select md-form my-0" name="order_by">
+                    <option value="asc" class="lang" key="asc"
+                      <%= (typeof filter !== 'undefined') ? ((filter.order_by == 'asc') ?  'selected'  : '') : '' %>>
+                      Ascending </option>
+                    <option value="desc" class="lang" key="desc"
+                      <%= (typeof filter !== 'undefined') ? ((filter.order_by == 'desc') ?  'selected'  : '') : '' %>>
+                      Descending </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="text-center mb-2">
+              <button class="btn btn-mdb-color lighten-1" type="submit"><i class="fas fa-check"></i>&nbsp;<span
+                  class="lang" key="done">Done</span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <a href="" class="btn mdb-color lighten-4 btn-rounded mb-4" data-toggle="modal" data-target="#modalOptions">
+        <i class="fas fa-sliders-h"></i>&nbsp;<span class="lang" key="filter">More Options</span> </a>
+    </div>
+    <!-- movies row -->
+    <div class="row" id='moviesContainer'>
+      <!-- row -->
+      <!-- Movie tumbnail -->
+      <% if(typeof movies !== 'undefined') { 
+          if (movies.length > 0) {
+          movies.forEach(movie => { %>
+      <div class="col-lg-3 col-md-6 col-sm-12 p-3">
+        <div class="card collection-card">
+          <% if (typeof watched !== 'undefined') { %>
+          <% if (watched.length > 0 && watched.includes(movie.imdb_code)) { %>
+          <a class="btn-floating btn-action  btn-sm mt-n4 ml-n2 mdb-color  teal lighten-2 waves-effect waves-light"><i
+              class="fas fa-eye"></i></a>
+          <% } else { %>
+          <a class="btn-floating btn-action  btn-sm mt-n4 ml-n2 mdb-color lighten-1 waves-effect waves-light"><i
+              class="fas fa-eye-slash"></i></a>
+          <% }} %>
+          <div class="view zoom">
+            <img class="img-fluid" src="<%= movie.large_cover_image || movie.image %>" alt="<%= movie.title %>" />
+            <div class="stripe dark">
+              <a href="/movies/watch/<%= movie.id %>" class="stretched-link">
+                <strong>
+                  <p><%= (typeof movie.title !== 'undefined') ? movie.title : '' %></p>
+                </strong>
+                <p>(<%= (typeof movie.year !== 'undefined') ? movie.year : '' %>) <i class="fas fa-star"></i>
+                  <%= (typeof movie.rating !== 'undefined') ? movie.rating : '' %></p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% });} else { %>
+      <div class="col-sm-12 p-3">
+        <div class="card mdb-color lighten-4 text-center">
+          <div class="card-body">
+            <i class="fas fa-frown fa-2x"></i>
+            <p><strong class="lang" key='sorry'>Sorry About That</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <% }
+        } %>
+    </div>
+    <% if(typeof movies !== 'undefined' && movies.length == 20) { %>
+    <form id="lazyLoad" class="text-center">
+      <button class="btn text-light mdb-color darken-3 btn-rounded lang" type="submit" key="load-more">
+        Load More
+      </button>
+    </form>
+    <div class="row justify-content-center">
+      <div class="spinner-grow white-text" style="display: none;" id="loading" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <% } %>
+  </div>
+  <br><br><br>
+  <%- include ('../partials/scripts.ejs') %>
+<script>
+  $(document).ready(function() {
+    $('.mdb-select').materialSelect();
+    $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+    $(this).closest('.select-outline').find('label').toggleClass('active');
+    $(this).closest('.select-outline').find('.caret').toggleClass('active');
+    });
+    });
+  </script>
+  <script type="text/javascript" src="/js/lazyLoad/lazyLoad.js"></script>
+  <%- include ('../partials/footer.ejs') %>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+.blured {
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+}
+.embed-responsive-21by9::before {
+  display: none;
+}
+
+.small_avatar {
+  width: 60px;
+  height: 60px;
+}
+
+
+.video-js .vjs-big-play-button {
+  top: 50%;
+  left: 50%;
+  margin-left: -1em;
+  margin-top: -1em;
+}
+
+.force-scroll {
+  max-height: 500px;
+  overflow-y: scroll; 
+  overflow-x: hidden;
+}
+
+.scrollbar-info::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px; }
+    
+.scrollbar-info::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5; }
+    
+.scrollbar-info::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #59698d; }
+    
+.scrollbar-info {
+    scrollbar-color: #59698d #F5F5F5;
+    }
+
+.square::-webkit-scrollbar-track {
+      border-radius: 0 !important; }
+      
+.square::-webkit-scrollbar-thumb {
+      border-radius: 0 !important; }
+      
+.thin::-webkit-scrollbar {
+      width: 6px; }
+
+.watchlistBtn, .favoriteBtn, .watchedBtn {
+  font-size: 1rem;
+}
+
+#addFavorites, #addWatchlist {
+  display: inline-block;
+}

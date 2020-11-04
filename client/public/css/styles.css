@@ -1,0 +1,42 @@
+.brand-logo {
+  font-family: "Graphique W01 Regular";
+  font-size: 50px;
+  color: black;
+}
+
+/* Body black background */
+body {
+  background: -webkit-gradient(
+      linear,
+      left top,
+      right bottom,
+      from(#424242),
+      to(#000000)
+    )
+    fixed;
+}
+
+/* Primary color used in navbar */
+.primecolor {
+  background-image: linear-gradient(
+    to left top,
+    #1a237e,
+    #182c87,
+    #153590,
+    #113e99,
+    #0d47a1
+  );
+}
+
+@font-face {
+  font-family: "Graphique Pro Next Shadow";
+  src: url("./Graphique\ Pro\ Next\ Shadow.otf");
+}
+@font-face {
+  font-family: "Graphique Pro Next Solid";
+  src: url("./Graphique\ Pro\ Next\ Solid.otf");
+}
+@font-face {
+  font-family: "Graphique W01 Regular";
+  src: url("./Graphique\ W01\ Regular.otf");
+}

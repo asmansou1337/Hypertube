@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <%- include ('../partials/head.ejs') %>
+  <body class="grey darken-4 d-flex flex-column min-vh-100">
+    <%- include ('../partials/navbar') %>
+    <div class="container wrapper flex-grow-1">
+      <div class="row mt-5">
+        <!-- Card Narrower -->
+        <div class="card card-cascade narrower stylish-color">
+          <!-- Card image -->
+          <div class="view view-cascade overlay">
+            <img
+              class="card-img-top"
+              src=" https://assets.nflxext.com/ffe/siteui/vlv3/3b48f428-24ed-4692-bb04-bc7771854131/a2cb1e37-759d-4f26-8a30-9c94394d6794/MA-en-20200302-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+              alt="Card image cap"
+            />
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body card-body-cascade">
+            <!-- Card -->
+            <div class="card testimonial-card stylish-color-dark">
+              <!-- Avatar -->
+              <div class="avatar mx-auto white">
+                <img
+                  src="<%= user && user.profileImg || 'https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg'%>"
+                  class="rounded-circle"
+                  alt="user_picture"
+                />
+              </div>
+
+              <!-- Content -->
+              <div class="card-body">
+                <!-- Name -->
+                <h4 class="card-title text-white">
+                  <%= user && user.username %>
+                </h4>
+                <br />
+                <div class="row">
+                  <div class="col-12">
+                    <h5 class=" d-flex blue-text justify-content-center lang" key="name">Name</h5>
+                      <h5 class="white-text justify-content-center">
+                        <i class="fas blue-grey-text fa-user-alt fa-fw"></i>
+                        <%= user && user.firstname %> <%= user && user.lastname %>
+                      </h5>
+                     
+                  </div>
+                </div>
+                <br>
+                <h4 class="cyan-text lang" key="statistics">Statistics</h4>
+                <div class="row">
+                  <div class="col-4">
+                    <h5 class="text-white lang" key="watched">
+
+                    </h5>
+                      <h5 class="white-text justify-content-center">
+                        <i class="fas fa-eye pink-text fa-fw"></i><%= user && user.watched.length %>
+                      </h5>
+                    
+                  </div>
+                  <div class="col-4">
+                    <h5 class="text-white lang" key="favorites"></h5>
+                      <h5 class="white-text justify-content-center">
+                    <i class="far fa-star purple-text fa-fw"></i><%= user && user.favorites.length %>
+                    </h5>
+                  </div>
+                  <div class="col-4">
+                    <h5 class="text-white lang" key="watchlist"></h5>
+                      <h5 class="white-text justify-content-center">
+                    <i class="fas fa-bookmark amber-text fa-fw"></i><%= user && user.watchlist.length %>
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Card -->
+          </div>
+        </div>
+        <!-- Card Narrower -->
+      </div>
+    </div>
+    <%- include ('../partials/scripts.ejs') %> 
+    <%- include('../partials/footer.ejs') %>
+  </body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('../partials/head.ejs') %>
+<link type="text/css" rel="stylesheet" href='/css/styles/auth.css'>
+<body class="d-flex flex-column min-vh-100">
+ 
+    <div class="container wrapper flex-grow-1" >
+        <div class="overlay">
+            <div class="row ">
+                <div class="logo  mt-1 ml-4 ">
+                    <a href="/">
+                        <img class=" img-fluid" src="https://fontmeme.com/permalink/200407/8813e43dda033418cb115fcdf3d3cb95.png" alt="netflix-font">
+                    </a>
+              
+                </div>
+                <div class="languages mr-1  text-light">
+                    <a class="translate" id="en">en</a>
+                    |
+                    <a class="translate" id="fr">fr</a>
+                </div>
+            </div>
+                <% if(typeof error != 'undefined'){ %>
+                  <div id="errors">
+                      <div class="card">
+                          <div class="card-body danger-color">
+                              <%= error %>
+                          </div>
+                      </div>
+                  </div>
+                  <% } %>
+
+                  <% if(typeof success != 'undefined'){ %>
+                    <div id="result">
+                        <div class="card">
+                            <div class="card-body success-color">
+                                <%= success %>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+
+            <% if(typeof errors != 'undefined'){ %>
+            <% for(let i=0; i<errors.length; i++){ %>
+                <div id="errors">
+                  <div class="card">
+                      <div class="card-body danger-color">
+                          <%= errors[i] %> 
+                      </div>
+                    </div>              
+                </div>
+
+              <% } %> 
+              <% } %> 
+              <% if(typeof results != 'undefined'){ %>
+
+              <% for(let i=0; i<results.length; i++){ %>
+                <div id="result">
+                    <div class="card">
+                        <div class="card-body success-color">
+                            <%= results[i] %>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+                <% } %> 
+
+        <div class="row">
+                <div class="login-wrap">
+            <div class="login-html">
+                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab lang"
+                    key="sign-in">Sign In</label>
+                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab lang"
+                    key="sign-up">Sign
+                    Up</label>
+                <div class="login-form">
+                    <div class="sign-in-htm">
+                        <!-- Form -->
+                        <form class="text-center" style="color: #757575;" action="/auth/login" method="POST">
+
+                            <!-- Email -->
+                            <div class="md-form">
+                                <input type="email" id="materialLoginFormEmailSignIn" class="form-control"  name="email" >
+                                <label for="materialLoginFormEmail" class="lang" key="email">E-mail</label>
+                            </div>
+                            <br>
+                            <!-- Password -->
+                            <div class="md-form">
+                                <input type="password" id="materialLoginFormPasswordSignIn" class="form-control"  name="password" >
+                                <label for="materialLoginFormPassword" class="lang" key="password">Password</label>
+                            </div>
+
+                            <div class="d-flex justify-content-around">
+                                <div>
+                                    <!-- Remember me -->
+                                    <div class="form-check">
+                                        <!-- <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
+                                            <label class="form-check-label" for="materialLoginFormRemember">Remember me</label> -->
+                                    </div>
+                                </div>
+                                <div>
+                                    <!-- Forgot password -->
+                                    <a href="/users/forgot" class="lang" key="forgot-password">Forgot password?</a>
+                                </div>
+                            </div>
+
+                            <!-- Sign in button -->
+                            <button class="btn text-light mdb-color darken-3 btn-rounded lang" key="sign-in">
+                                Sign in
+                            </button>
+                            <!-- <button class="btn btn-outline-info btn-rounded btn-block  waves-effect z-depth-0" type="submit">Sign in</button> -->
+
+                            <!-- Social login -->
+                            <p class="lang" key="or-sign-in-with">or sign in with:</p>
+                            <a type="button" class="btn-floating btn-li btn-sm" href="/auth/google">
+                                <i class="fab fa-google"></i>
+                            </a>
+                            <a type="button" class="btn-floating  white btn-sm " href="/auth/fortytwo">
+                                <img src="/images/42.png" height="20px" width="20px" style="margin: 8px;">
+                            </a>
+                        </form>
+                        <!-- Form -->
+                    </div>
+                    <div class="sign-up-htm">
+                        <!-- Form -->
+                        <!-- <form class="text-center" style="color: #757575;" action="/users/register" method="POST"> -->
+                            <!-- First-Name -->
+                            <div class="md-form mt-0">
+                                <input type="text"  name="firstname"
+                                    class="form-control">
+                                <label for="materialRegisterFormFirstName" class="lang"
+                                    key="first-name">First-Name</label>
+                            </div>
+                            <!-- Last-Name -->
+                            <div class="md-form mt-0">
+                                <input type="text"  name="lastname"
+                                    class="form-control">
+                                <label for="materialRegisterFormUsername" class="lang"
+                                    key="last-name">Last-Name</label>
+                            </div>
+                            <!-- Username -->
+                            <div class="md-form mt-0">
+                                <input type="text" id="materialRegisterFormEmailSignUp" name="username"
+                                    class="form-control">
+                                <label for="materialRegisterFormUsername" class="lang"
+                                    key="username">Username</label>
+                            </div>
+
+                            <!-- E-mail -->
+                            <div class="md-form mt-0">
+                                <input type="email" id="materialRegisterFormEmail" name="email"
+                                    class="form-control">
+                                <label for="materialRegisterFormEmail" class="lang" key="email">E-mail</label>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="md-form">
+                                <input type="password" id="materialRegisterFormPasswordSignUp" name="password"
+                                    class="form-control"
+                                    aria-describedby="materialRegisterFormPasswordHelpBlock">
+                                <label for="materialRegisterFormPassword" class="lang"
+                                    key="password">Password</label>
+                                <small id="materialRegisterFormPasswordHelpBlock"
+                                    class="form-text text-muted mb-4 lang"
+                                    key="at-least-8-characters-and-1-digit">
+                                    At least 8 characters and 1 digit
+                                </small>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="md-form">
+                                <input type="password" name="confirm"
+                                    id="materialRegisterFormPasswordSignUpConfirm" class="form-control"
+                                    aria-describedby="materialRegisterFormPasswordHelpBlock">
+                                <label for="materialRegisterFormPassword" class="lang"
+                                    key="confirm-password">Confirm
+                                    Password</label>
+                                <small id="materialRegisterFormPasswordHelpBlock"
+                                    class="form-text text-muted mb-4 lang"
+                                    key="at-least-8-characters-and-1-digit">
+                                    At least 8 characters and 1 digit
+                                </small>
+                            </div>
+
+
+                            <!-- Sign up button -->
+                            <!-- <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
+                                type="submit">Sign in</button> -->
+                            <button class="btn text-light mdb-color darken-3 btn-rounded lang" key="sign-up" onclick="handleRegister()">
+                                Sign up
+                            </button>
+
+                        <!-- </form> -->
+                        <!-- Form -->
+                        <div class="hr"></div>
+                        <div class="foot-lnk">
+                            <label for="tab-1" class="lang" key="already-member">Already Member?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+
+    <%- include ('../partials/scripts.ejs') %>
+    <%- include ('../partials/footer.ejs') %>
+    <script>
+        setTimeout(function(){
+        if ($('#errors').length > 0) {
+            $('#errors').remove();
+         }
+         if ($('#result').length > 0) {
+            $('#result').remove();
+         }
+        }, 5000)
+        function handleRegister(){
+            const firstname = document.getElementsByName('firstname') && document.getElementsByName('firstname')[0].value
+            const lastname =document.getElementsByName('lastname') && document.getElementsByName('lastname')[0].value
+            const username =document.getElementsByName('username') && document.getElementsByName('username')[0].value
+            const email =document.getElementsByName('email') && document.getElementsByName('email')[1].value
+            const password =document.getElementsByName('password') && document.getElementsByName('password')[1].value
+            const confirm =document.getElementsByName('confirm') && document.getElementsByName('confirm')[0].value
+            const registerData = {
+            firstname,
+            lastname,
+            username ,
+            email ,
+            password ,
+            confirm ,
+            }
+            axios.post('http://localhost/users/register', registerData)
+            .then((res) => {
+                if(res && res.data && res.data.error)
+                    toastr.error(res.data.error);
+                if(res && res.data && res.data.success)
+                    toastr.success(res.data.success);
+            }).catch(e => {
+                    toastr.error('Something Went Wrong');
+            })
+        }
+        
+    </script>
+</body>
+
+</html>

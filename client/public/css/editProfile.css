@@ -1,0 +1,115 @@
+
+    /* Body black background */
+    body {
+      background: -webkit-gradient(
+          linear,
+          left top,
+          right bottom,
+          from(#424242),
+          to(#000000)
+        )
+        fixed;
+        font-family: Futura,Trebuchet MS,Arial,sans-serif;  
+    }
+    
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus input:-webkit-autofill,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+      -webkit-text-fill-color: #fff !important;
+      -webkit-color: #fff !important;
+      -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset !important;
+      transition: background-color 5000s ease-in-out 0s !important;
+    }
+    
+    .form-control {
+      color: white;
+    }
+    
+    .form-control:focus {
+      color: white;
+      background-color: transparent;
+      outline-style:none;
+      box-shadow:none;
+    }
+
+  .file{
+    display:none;
+  }
+
+
+.btn-grad {
+  background-image: linear-gradient(to right, #24C6DC 0%, #514A9D 100%);
+  margin-left: 19px;
+}
+.btn-grad:hover { background-position: right center; }
+
+.form-horizontal
+{
+  width: 100%;
+}
+
+.form-control{
+  background: transparent;
+  border: transparent;
+  border-bottom: 1px solid white;
+  border-radius: 0rem;
+  color: #fff;
+}
+
+.profile-pic {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  vertical-align: middle;
+  text-align: center;
+  color: transparent;
+  transition: all .3s ease;
+  text-decoration: none;
+}
+
+.profile-pic:hover {
+  background-color: rgba(0,0,0,.5);
+  z-index: 10000;
+  color: #fff;
+  transition: all .3s ease;
+  text-decoration: none;
+}
+
+.profile-pic span {
+  display: inline-block;
+  padding-top: 4.5em;
+  padding-bottom: 4.5em;
+}
+
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    from(#424242),
+    to(#000000)
+  )
+  fixed;
+}
+
+a{
+  color : #7d8a98;
+}
+a:hover{
+  color : #7d8a98;
+}
+
+.btn{
+  width: auto;
+  text-transform: capitalize;
+  font-size: 0.9rem;
+}

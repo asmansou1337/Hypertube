@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <%- include ('../partials/head.ejs') %>
+  <body class="grey darken-4 d-flex flex-column min-vh-100">
+    <%- include ('../partials/navbar') %>
+    <div class="container wrapper flex-grow-1">
+
+      <h1 class="text-white mt-5" key="<%= title %>"><%= title %></h1>
+
+      <% if (error) { %>
+        <h2 class="red-text mt-5 text-center"><%= error %></h2>
+      <% } %>
+      <div class="row p-3">
+        <% if (movies) { %> <% movies.forEach(function(movie){ %>
+        <!-- News jumbotron -->
+        <div class="jumbotron stylish-color text-center p-4">
+          <!-- Grid row -->
+          <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-4 offset-md-1 mx-3 my-3">
+              <!-- Featured image -->
+              <div class="view overlay d-flex justify-content-center">
+                <img
+                  src="<%= movies && movie.poster %>"
+                  class="img-fluid"
+                  alt="<%=  movies && movie.title %>"
+                />
+                <a>
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+            </div>
+            <!-- Grid column -->
+            <!-- Grid column -->
+            <div class="col-md-7 text-md-left ml-3 mt-3">
+              <!-- Excerpt -->
+              <a href="<%=  movies && movie.imdburl %>" target="_blank" class="cyan-text">
+                <h3 class="h3 pb-1"><%= movies && movie.title %></h3>
+              </a>
+
+              <h4 class="h4 mb-4 text-white">
+                (<%= movies && movie.year %>) <i class="fas fa-star yellow-text"></i> <%=
+                movies && movie.rating %>
+              </h4>
+
+              <p class="font-weight-normal text-white"> <%= movies && movie.plot %></p>
+              <p class="font-weight-normal text-white">
+                <a><strong>Actors: </strong></a
+                ><%= movies && movie.actors %>
+              </p>
+              <a
+                class="btn btn-warning"
+                href="<%=  movies && movie.imdburl %>"
+                target="_blank"
+                >More Info</a
+              >
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+        <!-- News jumbotron -->
+        <% }); %> <% } %>
+      </div>
+    </div>
+    <%- include ('../partials/scripts.ejs') %> 
+    <%- include ('../partials/footer.ejs') %>
+  </body>
+</html>

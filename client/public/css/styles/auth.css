@@ -1,0 +1,260 @@
+html,body {
+	font-family: Futura,Trebuchet MS,Arial,sans-serif;  
+	margin: 0px;
+	padding: 0px;
+}  
+
+.container {
+	background:url(https://assets.nflxext.com/ffe/siteui/vlv3/3b48f428-24ed-4692-bb04-bc7771854131/a2cb1e37-759d-4f26-8a30-9c94394d6794/MA-en-20200302-popsignuptwoweeks-perspective_alpha_website_large.jpg) no-repeat center;	
+	background-size:  cover;
+	padding-right:0px;
+    padding-left:0px;
+    margin-right:auto;
+    margin-left:auto;
+	min-width: 100%;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.overlay{
+
+	background:rgba(46,57,81,.5); 
+	background-size: cover;
+	padding: 0;
+	height: 100vh;
+	min-width: 100%;
+}
+
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus input:-webkit-autofill,
+	textarea:-webkit-autofill,
+	textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+	select:-webkit-autofill,
+	select:-webkit-autofill:hover,
+	select:-webkit-autofill:focus {
+		-webkit-text-fill-color: #fff !important;
+		-webkit-color: #fff !important;
+		-webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset !important;
+		transition: background-color 5000s ease-in-out 0s !important;
+	}
+	
+	.form-control {
+		color: white;
+	}
+	
+	.form-control:focus {
+		color: white;
+	}
+
+.login-wrap{
+	width:100%;
+	margin:auto;
+	margin-top: 21px;
+	max-width:525px;
+	min-height:670px;
+	position:relative;
+    background-color: #2e3951 !important;  
+	/* background-color: #7283a7 !important; */
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+.login-html{
+	width:100%;
+	height:100%;
+	position:absolute;
+	padding:30px 70px 50px 70px;
+}
+.login-html .sign-in-htm,
+.login-html .sign-up-htm{
+	margin-top: 10px;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	position:absolute;
+	transform:rotateY(180deg);
+	backface-visibility:hidden;
+	transition:all .4s linear;
+}
+.login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check{
+	display:none;
+}
+.login-html .tab,
+.login-form .group .label,
+.login-form .group .button{
+	text-transform:uppercase;
+}
+.login-html .tab{
+	font-size:22px;
+	margin-right:15px;
+	padding-bottom:5px;
+	margin:0 15px 10px 0;
+	display:inline-block;
+	border-bottom:2px solid transparent;
+}
+.login-html .sign-in:checked + .tab,
+.login-html .sign-up:checked + .tab{
+	color:#fff;
+	border-color:#1161ee;
+}
+.login-form{
+	min-height:345px;
+	position:relative;
+	perspective:1000px;
+	transform-style:preserve-3d;
+}
+.login-form .group{
+	margin-bottom:15px;
+}
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button{
+	width:100%;
+	color:#fff;
+	display:block;
+}
+.login-form .group .input,
+.login-form .group .button{
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
+}
+.login-form .group input[data-type="password"]{
+	text-security:circle;
+	-webkit-text-security:circle;
+}
+.login-form .group .label{
+	color:#aaa;
+	font-size:12px;
+}
+.login-form .group .button{
+	background:#1161ee;
+}
+.login-form .group label .icon{
+	width:15px;
+	height:15px;
+	border-radius:2px;
+	position:relative;
+	display:inline-block;
+	background:rgba(255,255,255,.1);
+}
+.login-form .group label .icon:before,
+.login-form .group label .icon:after{
+	content:'';
+	width:10px;
+	height:2px;
+	background:#fff;
+	position:absolute;
+	transition:all .2s ease-in-out 0s;
+}
+.login-form .group label .icon:before{
+	left:3px;
+	width:5px;
+	bottom:6px;
+	transform:scale(0) rotate(0);
+}
+.login-form .group label .icon:after{
+	top:6px;
+	right:0;
+	transform:scale(0) rotate(0);
+}
+.login-form .group .check:checked + label{
+	color:#fff;
+}
+.login-form .group .check:checked + label .icon{
+	background:#1161ee;
+}
+.login-form .group .check:checked + label .icon:before{
+	transform:scale(1) rotate(45deg);
+}
+.login-form .group .check:checked + label .icon:after{
+	transform:scale(1) rotate(-45deg);
+}
+.login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm{
+	transform:rotate(0);
+}
+.login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
+	transform:rotate(0);
+}
+
+.hr{
+	height:2px;
+	margin:5px 0 2px 0;
+	background:rgba(255,255,255,.2);
+}
+.foot-lnk{
+	text-align:center;
+}
+
+label{
+	color: white;
+}
+
+
+.btn{
+	width: 100%;
+	text-transform: capitalize;
+	font-size: 0.9rem;
+}
+
+
+/* .logo_div{
+	background:rgba(46,57,81,.5); 
+	align-items: center;
+	text-align: center; 
+} */
+
+/* .logo{
+	margin: 15px;
+} */
+
+.languages {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+
+.card {
+    border-radius: 10px;
+    width: 100%;
+    margin: auto;
+    margin-top: 50px;
+    max-width: 525px;
+    min-height: auto;
+    position: relative;
+    background-color: #2e3951 !important;
+    /* background-color: #7283a7 !important; */
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+  }
+
+  /* logo */
+
+  @media only screen and (max-width: 1449px) and (min-width: 950px){
+		.logo {
+		height: 36px;
+		width: 134px;
+	}  
+  }
+
+  .logo{
+	  padding-top: 0.5rem;
+  }
+
+  @media only screen and (max-width: 949px) and (min-width: 550px){
+		.logo {
+			height: 32px;
+			width: 108px;
+		}
+  }
+
+  @media only screen and (max-width: 549px) and (min-width: 400px), only screen and (max-width: 399px) and (min-width: 350px), only screen and (max-width: 349px){
+		.logo {
+			height: 24px;
+			width: 30%;
+		}
+  }
+
