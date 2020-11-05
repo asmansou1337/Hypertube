@@ -9,8 +9,8 @@ captionsRouter.get('/:id', async (req ,res) => {
         const captions = await captionsController.findCaptions(req.params.id)
         if(!captions)
             return res.status(404).send({Message: "Captions not found"})
-        const CaptionFile = await utilities.findRquestedLang(captions, req.query.lang)
-        if(!CaptionFile)
+        const captionFile = await utilities.findRquestedLang(captions, req.query.lang)
+        if(!captionFile)
             return res.status(404).send({Message: "Captions for desired langage not found"})
         setTimeout(() => {
             return res.status(200).sendFile(`${req.params.id}.vtt`, {"root": `./movies/vtt/${req.params.id}/${req.query.lang}/`}) 
