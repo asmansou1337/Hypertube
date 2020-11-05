@@ -32,6 +32,6 @@ module.exports = {
            pass: 'FYdNWP)7mP{Q##(6'
         }
       },
-      imdbKey: 'a7289f37'
+    imdbKey: 'a7289f37'
 
 }

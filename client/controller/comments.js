@@ -8,6 +8,8 @@ const Dictionary = require('../libraries/dictionary')
 const Comments = {
   commentAdd: async (content, user, imdb) => {
     try {
+      if (typeof imdb === undefined || imdb === '')
+        throw new Error(Dictionary().INVALID_MOVIE_ID)
       await imdbAPI.get({id:imdb}, {apiKey: imdbKey}).catch((e) => {
         throw new Error(Dictionary().INVALID_MOVIE_ID)
       })

@@ -7,7 +7,7 @@ const utilities = require('../libraries/utilities')
 const checkUrl = require('../helpers/checkUrl');
 
 // Add New comment
-commentsRouter.post("/add/:imdb", verifyAuth, async (req, res) => {
+commentsRouter.post("/add", verifyAuth, async (req, res) => {
   try {
     if(!req.user)
       throw new Error(Dictionary().SOMETHING_WENT_WRONG)
@@ -16,7 +16,7 @@ commentsRouter.post("/add/:imdb", verifyAuth, async (req, res) => {
     const { content, date } = await commentsController.commentAdd(
       req.body.comment,
       _id,
-      req.params.imdb
+      req.query.imdb
     );
     if(!checkUrl(profileImg)){
       profileImg = '/images/'+ profileImg

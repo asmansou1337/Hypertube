@@ -1,49 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include ('../partials/head.ejs') %>
-<body class="grey darken-4 d-flex flex-column min-vh-100">
+    <head>
+      <%- include ('../partials/head.ejs') %>
+      <link href="https://vjs.zencdn.net/7.7.6/video-js.css" rel="stylesheet" />
+      <link rel="stylesheet" href="/css/styles/homeStyle.css">
+    </head>
+<body class="backStyle d-flex flex-column min-vh-100">
     <%- include ('../partials/navbar') %>
-        <div id="<%= movie.id %>" class="container wrapper flex-grow-1">
 
-            <div class="player" id="<%= movie.imdb_code %>">
-                <div class="card card-image" style="background-image: url('<%= movie.large_cover_image %>');">
-                    <div class="card-body rgba-black-strong">
-                      <div class="container flex-center text-center">
-                        <div id="moviePlayer" class="embed-responsive embed-responsive-21by9">
-                            <video        
-                            id="my-video"
-                            class="video-js"
-                            controls
-                            preload="none"
-                            fluid= true
-                            poster="<%= movie.large_screenshot_image1 %>"
-                            data-setup="{}"
-                            >
-                            <track id="enSub" label="English" kind="subtitles" srclang="en" src="/movies/captions/<%= movie.imdb_code %>?lang=en" type="text/vtt">
-                            <track id="frSub" label="French" kind="subtitles" srclang="fr" src="/movies/captions/<%= movie.imdb_code %>?lang=fr"  type="text/vtt">
-                            <source id="srcMP4" src="http://localhost:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/mp4" />
-                            <source id="srcWEBM" src="http://localhost:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/webm" />
-                            </video>
-                        </div>
-                        </div>
-                    </div>
-                  </div>
+    <div class="player" id="<%= movie.imdb_code %>">
+        <div class="card card-image" style="background-image: url('<%= movie.large_cover_image %>');">
+          <div id="<%= movie.id %>" class="card-body rgba-black-strong videoContainer" style="display: none;">
+            <div class="container flex-center text-center">
+              <!-- <div id="moviePlayer" class="embed-responsive embed-responsive-21by9">
+                <video 
+                id="my-video"
+                class="video-js"
+                controls
+                preload="auto"
+                fluid= true
+                poster="<%= movie.large_screenshot_image1 %>"
+                data-setup="{}"
+                >
+                <source src="http://localhost:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/mp4" />
+                <source src="http://localhost:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/webm" />
+              </video>
+              </div> -->
+              </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="container wrapper flex-grow-1">
+      <!-- Torrents list -->
+      <!-- Button trigger modal-->
+      <div class="text-center">
+          <button type="button" class="btn mdb-color btnColor btn-rounded mb-4"  data-toggle="modal" data-target="#modalTorrents">
+              <i class="fas fa-sliders-h"></i>&nbsp;<span class="lang" key="ChooseTorrents">Select your torrent</span>
+          </button>
+      </div>
+
+      <div class="modal fade w-100" id="modalTorrents" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog cascading-modal modal-lg" role="document">
+          <div class="modal-content backStyle">
+            <div class="modal-header mdb-color modalBtnColor">
+              <h4 class="title"><i class="fas fa-film"></i>&nbsp;<span class="lang"
+                  key="ChooseTorrents">Select your torrent</span></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <div class="movie m-3">
-              <ul class="nav md-pills nav-justified pills-mdb-color mb-4">
-                <li class="nav-item pl-0">
-                  <a class="nav-link active lang" data-toggle="tab" href="#panel104" role="tab" key="movie-infos">Movie</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link lang" data-toggle="tab" href="#panel105" role="tab" key="comments">Comments</a>
-                </li>
-              </ul>
-              <!-- Tab panels -->
-              <div class="tab-content mdb-color darken-3 card white-text">
-              <!--Panel 1-->
-              <div class="tab-pane fade in show active" id="panel104" role="tabpanel">
-              <!-- Movie Infos -->
+           
+            <div class="modal-body mx-3">
               <div class="row">
+                <!-- YTS Torrents -->
+                <div class="col-md-6 text-center">
+                  <h5>YiFy Torrents</h5>
+                    <% if (movie.YTS && movie.YTS.length > 0) { %>
+                      <% movie.YTS.forEach(function(element){ %>
+                          <% if (element.type && element.quality) { %>
+                            <button id="<%= element.hash %>" onclick="loadTorrent(this.id)" class="btn modalBtnColor white-text btn-block p-2 m-1"><%= element.quality + ' - ' + element.type %></button>
+                          <% } %>
+                        <% }); %>
+                    <% } %>
+                </div>
+                <!-- LEETx Torrents -->
+                <div class="col-md-6 text-center">
+                  <h5>1337x Torrents</h5>
+                    <% if (movie.LEETx && movie.LEETx.length > 0) { %>
+                      <% movie.LEETx.forEach(function(element){ %>
+                        <% if (element.title && element.size) { %>
+                          <button id="<%= element.hash %>" onclick="loadTorrent(this.id)" class="btn modalBtnColor white-text btn-block p-2 m-1"><%= element.title + ' - ' + element.size %></button>
+                        <% } %>
+                        <% }); %>  
+                    <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Movie Infos Box -->
+            <div class="movie m-3">
+              <!-- Movie Infos -->
+              <div class="row tab-content">
                 <div class="mx-2 mt-3 col col-sm-6 col-md-4 col-lg-4">
                   <img
                       class="img-fluid"
@@ -56,60 +98,17 @@
                     <div class="card-body text-justify">
 
             
-                        <button name="<%= movie.imdb_code %>" onclick="addToFavorites(this.name)" class="btn text-light mdb-color <%= (user.inFavorites === 1) ? 'teal' : '' %> darken-1 btn-rounded favoriteBtn">
+                        <button name="<%= movie.imdb_code %>" onclick="addToFavorites(this.name)" class="btn text-light mdb-color <%= (user.inFavorites === 1) ? 'btnColorTeal' : 'btnColorGrey' %>  btn-rounded favoriteBtn">
                           <i class="fas fa-star"></i>
                         </button>
-                        <button name="<%= movie.imdb_code %>" onclick="addToWatchList(this.name)" class="btn text-light mdb-color <%= (user.inWatchlist === 1) ? 'teal' : '' %> darken-1 btn-rounded watchlistBtn">
+                        <button name="<%= movie.imdb_code %>" onclick="addToWatchList(this.name)" class="btn text-light mdb-color <%= (user.inWatchlist === 1) ? 'btnColorTeal' : 'btnColorGrey' %> btn-rounded watchlistBtn">
                           <i class="fas fa-bookmark"></i>
                         </button>
-                        <button name="<%= movie.imdb_code %>" onclick="addToWatched(this.name)" class="btn text-light mdb-color <%= (user.inWatched === 1) ? 'teal' : '' %> darken-1 btn-rounded watchedBtn">
+                        <button name="<%= movie.imdb_code %>" onclick="addToWatched(this.name)" class="btn text-light mdb-color <%= (user.inWatched === 1) ? 'btnColorTeal' : 'btnColorGrey' %> btn-rounded watchedBtn">
                           <i class="fas fa-eye"></i>
                         </button>
-                                            <!-- Button trigger modal-->
-                                            <button type="button" class="btn text-light mdb-color darken-1 btn-rounded watchedBtn"  data-toggle="modal" data-target="#modalSocial"><i class="fas fa-film"></i></button>
-
-                                            <!--Modal: modalSocial-->
-                                            <div class="modal fade" id="modalSocial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                                              aria-hidden="true">
-                                              <div class="modal-dialog cascading-modal" role="document">
-
-                                                <!--Content-->
-                                                <div class="modal-content grey darken-4" >
-
-                                                  <!--Header-->
-                                                  <div class="modal-header light-blue darken-3 white-text" >
-                                                    <h4 class="title"><i class="fas fa-film"></i>&nbsp;<span class="lang"
-                                                      key="ChooseTorrents">Select your torrent</span></h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                                        aria-hidden="true">&times;</span></button>
-                                                  </div>
-
-                                                  <!--Body-->
-                                                  <div class="modal-body mb-0 text-center grey darken-4">
-                                                    <h5>YiFy Torrrents</h5>
-                                                    <% if (movie.YTS && movie.YTS.length > 0) { %>
-                                                      <% movie.YTS.forEach(function(element){ %>
-                                                          <% if (element.type && element.quality) { %>
-                                                            <button id="<%= element.hash %>" onclick="loadTorrent(this.id)" class="btn light-blue darken-3 white-text btn-block p-2 m-1"><%= element.quality + ' - ' + element.type %></button>
-                                                          <% } %>
-                                                        <% }); %>
-                                                    <% } %>
-                                                    <hr>
-                                                    <h5>1337x Torrrents</h5>
-                                                    <% if (movie.LEETx && movie.LEETx.length > 0) { %>
-                                                      <% movie.LEETx.forEach(function(element){ %>
-                                                        <% if (element.title && element.size) { %>
-                                                          <button id="<%= element.hash %>" onclick="loadTorrent(this.id)" class="btn light-blue darken-3 white-text btn-block p-2 m-1"><%= element.title + ' - ' + element.size %></button>
-                                                        <% } %>
-                                                        <% }); %>  
-                                                    <% } %>
-                                                  </div>
-                                                </div>
-                                                <!--/.Content-->
-
-                                              </div>
-                                            </div>
-                                            <!--Modal: modalSocial-->
+                                            
+                                        
                       <h2><p class="font-weight-bold"><%= movie.title_english %>&nbsp;(<%= movie.year %>)</p></h2>
                       <p style="font-size: medium;"><i class="fas fa-star" style="color: yellow;"></i>&nbsp;<span style="font-size: large;"><%= movie.rating %></span>/10</p>
                       <p><%= movie.description_full %></p>
@@ -136,40 +135,68 @@
                 </div>
               </div>
               <!-- Movie Infos -->
-              </div>
-              <div class="tab-pane fade" id="panel105" role="tabpanel">
-                  <!-- Add New Comment -->
-                  <ul class="list-unstyled">
-                    <li class="media">
-                      <div class="row media-body">
-                        <div class="col-10">
-                          <div class="md-form"> 
-                            <textarea id="myComment" class="md-textarea text-light form-control" style="resize: none;" rows="1" name="comment"></textarea>
-                          </div>
-                        </div>
-                        <div class="col-2">
-                          <button type="button" onclick="postComment()" class="btn btn-light mt-5 btn-block"><i class="fas fa-comment"></i></button>
+              <div class="tab-content mt-4">
+                 <!-- Add New Comment -->
+                 <!-- <ul class="list-unstyled">
+                  <li class="media">
+                    <div class="row media-body">
+                      <div class="col-10">
+                        <div class="md-form"> 
+                          <textarea id="myComment" class="md-textarea text-light form-control" style="resize: none;" rows="1" name="comment"></textarea>
                         </div>
                       </div>
-                    </li>
-                  </ul>
-                  <hr class="my-4 mdb-color lighten-1"/>
-                  <!-- Comments  -->    
-                  <div class="col-sm-12 justify-content-center">
-                      <!-- List of comments -->
-                      <div class="row d-flex" >
-                        <ul class="list-unstyled" id="commentsContainer">
-
-                        </ul>
+                      <div class="col-2">
+                        <button type="button" onclick="postComment()" class="btn btn-light mt-5 btn-block"><i class="fas fa-comment"></i></button>
                       </div>
+                    </div>
+                  </li>
+                </ul> -->
+                <ul class="list-unstyled" style="display: block;">
+                  <li class="media">
+                  <a href="/users/view/<%= user.userId %>"><img
+                      class="rounded-circle small_avatar z-depth-1-half mr-3 mt-4" style="width: 80px; height: 80px;"
+                      src="<%= user.profileImg %>"
+                      alt="<%= user.username %>"
+                  /></a>
+                  <div class="row media-body">
+                    <div class="col-10">
+                      <div class="md-form"> 
+                        <textarea id="myComment" class="md-textarea form-control white-text" style="resize: none;" name="comment" rows="1"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <button type="button" onclick="postComment()" class="btn mdb-color btnColor btn-rounded mt-5"><i class="fas fa-comment"></i></button>
+                    </div>
                   </div>
-                  <!-- End Comments  -->
+                </li>
+                </ul>
+                
+                <!-- <hr class="my-4 mdb-color lighten-1"/> -->
+                <!-- Comments  -->    
+                <div class="col-sm-12 justify-content-center">
+                    <!-- List of comments -->
+                    <div class="row d-flex" >
+                      <ul class="list-unstyled" id="commentsContainer">
+
+                      </ul>
+                    </div>
                 </div>
-            </div>
+                <!-- End Comments  -->
+              </div>
+               
           </div>
         </div>
     <%- include ('../partials/scripts.ejs') %> 
     <%- include('../partials/footer.ejs') %>
+    <script>
+      // Tooltips Initialization
+      $(function () {
+         $('[data-toggle="tooltip"]').tooltip()
+       })
+   </script>
+   <script src="https://vjs.zencdn.net/7.7.6/video.js"></script>
+   <script src="/js/video/player/lang/fr.js"></script>
+   <script src="/js/video/playerSettings.js"></script>
     <script>
 
       function addToFavorites(id){
@@ -226,11 +253,11 @@
                   $commentsContainer.innerHTML += '\
                   <li class="media mt-2">\
                   <a href="/users/view/'+element.userId+'">\
-                  <img class="d-flex mr-3" src="'+ element.profileImg +'"\"\
+                  <img class="rounded-circle small_avatar d-flex mr-3" src="'+ element.profileImg +'"\"\
                   alt="Avatar" style="height: auto; width: 50px;">\
                   </a>\
                   <div class="media-body">\
-                    <h5 class="mt-0 font-weight-bold blue-text">'+ element.username +'</h5>\
+                    <h5 class="mt-0 font-weight-bold black-text">'+ element.username +'</h5>\
                     <p class="text-break">'+ element.content+'</p>\
                   </div>\
                   </li>'
@@ -249,41 +276,19 @@
           comment
         }
         
-        axios.post('http://localhost/comments/add/'+id+'', data)
+        axios.post('http://localhost/comments/add?imdb='+id+'', data)
             .then((res) => {
                 if(res && res.data && res.data.error)
                     toastr.error(res.data.error);
                 if(res && res.data && res.data.content && res.data.username && res.data.profileImg){
                   $commentsContainer.innerHTML = ''
+                  document.getElementById('myComment').value = ''
                   getComments()
                 }                 
             }).catch(e => {
                     toastr.error('Something Went Wrong');
             })
       }
-
-     
-      
-      function loadTorrent(hash){
-        var videoPlayer = document.getElementById('my-video')
-        var movieId = document.getElementsByClassName('container') && document.getElementsByClassName('container')[0].id
-        var srcMPfour = document.getElementById('srcMP4')
-        var srcWEBM = document.getElementById('srcWEBM')
-        if(srcMPfour && srcWEBM){
-          srcMPfour.setAttribute('src', 'http://localhost:3000/movies/watch/'+ movieId + '?hash='+ hash +'');
-          srcWEBM.setAttribute('src', 'http://localhost:3000/movies/watch/'+ movieId + '?hash='+ hash +'');
-          videoPlayer.load();
-          var playPromise = videoPlayer.play();
-          if (playPromise !== undefined) {
-          playPromise.then(_ => {
-          })
-          .catch(error => {
-            toastr.error('Error');
-          });
-  }
-        }   
-      }
-
-    </script>
+</script>
 </body>
 </html>

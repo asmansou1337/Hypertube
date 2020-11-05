@@ -3,10 +3,10 @@
 
 <head>
   <%- include ('../partials/head.ejs') %>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/styles/homeStyle.css">
 </head>
 
-<body class="grey darken-4 d-flex flex-column min-vh-100">
+<body class="backStyle d-flex flex-column min-vh-100">
 
   <%- include ('../partials/navbar') %>
 
@@ -26,9 +26,9 @@
     <!-- Search / Filter & Sort -->
     <div class="modal fade w-100" id="modalOptions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
       aria-hidden="true">
-      <div class="modal-dialog cascading-modal" role="document">
-        <div class="modal-content  grey darken-4">
-          <div class="modal-header mdb-color lighten-3">
+      <div class="modal-dialog cascading-modal modal-lg" role="document">
+        <div class="modal-content backStyle">
+          <div class="modal-header mdb-color modalBtnColor">
             <h4 class="title"><i class="fas fa-sliders-h"></i>&nbsp;<span class="lang" key="filter">Options</span></h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -179,7 +179,7 @@
               </div>
             </div>
             <div class="text-center mb-2">
-              <button class="btn btn-mdb-color lighten-1" type="submit"><i class="fas fa-check"></i>&nbsp;<span
+              <button class="btn btn-mdb-color modalBtnColor" type="submit"><i class="fas fa-check"></i>&nbsp;<span
                   class="lang" key="done">Done</span></button>
             </div>
           </form>
@@ -188,7 +188,7 @@
     </div>
 
     <div class="text-center">
-      <a href="" class="btn mdb-color lighten-4 btn-rounded mb-4" data-toggle="modal" data-target="#modalOptions">
+      <a href="" class="btn mdb-color btnColor btn-rounded mb-4" data-toggle="modal" data-target="#modalOptions">
         <i class="fas fa-sliders-h"></i>&nbsp;<span class="lang" key="filter">More Options</span> </a>
     </div>
     <!-- movies row -->
@@ -205,7 +205,7 @@
           <a class="btn-floating btn-action  btn-sm mt-n4 ml-n2 mdb-color  teal lighten-2 waves-effect waves-light"><i
               class="fas fa-eye"></i></a>
           <% } else { %>
-          <a class="btn-floating btn-action  btn-sm mt-n4 ml-n2 mdb-color lighten-1 waves-effect waves-light"><i
+          <a class="btn-floating btn-action  btn-sm mt-n4 ml-n2 mdb-color watchBtn waves-effect waves-light"><i
               class="fas fa-eye-slash"></i></a>
           <% }} %>
           <div class="view zoom">
@@ -224,7 +224,7 @@
       </div>
       <% });} else { %>
       <div class="col-sm-12 p-3">
-        <div class="card mdb-color lighten-4 text-center">
+        <div class="card mdb-color btnColor text-center">
           <div class="card-body">
             <i class="fas fa-frown fa-2x"></i>
             <p><strong class="lang" key='sorry'>Sorry About That</strong></p>
@@ -237,7 +237,7 @@
     </div>
     <% if(typeof movies !== 'undefined' && movies.length == 20) { %>
     <form id="lazyLoad" class="text-center">
-      <button class="btn text-light mdb-color darken-3 btn-rounded lang" type="submit" key="load-more">
+      <button class="btn text-light mdb-color btnColor btn-rounded lang" type="submit" key="load-more">
         Load More
       </button>
     </form>

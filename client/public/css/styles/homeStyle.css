@@ -1,0 +1,78 @@
+.dropdown-content {
+    background-color: #D3D9BF !important;
+  }
+  .select-dropdown li.disabled, .select-dropdown li.disabled>span, .select-dropdown li.optgroup {
+    color: #1A3C40 !important;
+  }
+  .dropdown-content li>a, .dropdown-content li>span {
+    color:black;
+  }
+  .dropdown-content li.active, .dropdown-content li>span:hover {
+    color: #77A69D !important;
+  }
+
+  .backStyle {
+    background-color: #061D26 !important;
+  }
+
+  .btnColor {
+    background-color: #D3D9BF !important;
+    color: black !important;
+  }
+
+  .modalBtnColor {
+    color: black !important;
+    background-color: #D3D9BF !important;
+  }
+
+  .watchBtn {
+    background-color: #A5A68F !important;
+  }
+
+  .watchlistBtn, .favoriteBtn, .watchedBtn {
+    font-size: 1.2rem;
+  }
+
+  .btnColorGrey {
+    background-color: #D3D9BF !important;
+    color: black !important;
+  }
+
+  .btnColorTeal {
+    background-color: #1A3C40 !important;
+    color: wheat !important;
+  }
+  
+  #addFavorites, #addWatchlist {
+    display: inline-block;
+  }
+
+  .tab-content {
+    background-color: #77A69D !important;
+  }
+  
+  .errorComments {
+    margin-top: 10px;
+  }
+
+  .blured {
+    /* Add the blur effect */
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+  }
+  .embed-responsive-21by9::before {
+    display: none;
+  }
+  
+  .small_avatar {
+    width: 60px;
+    height: 60px;
+  }
+  
+  
+  .video-js .vjs-big-play-button {
+    top: 50%;
+    left: 50%;
+    margin-left: -1em;
+    margin-top: -1em;
+  }

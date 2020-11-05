@@ -119,7 +119,7 @@ moviesRouter.get('/captions/:id', verifyAuth, async (req, res) => {
         return res.send(caption)
     } catch (e) {
        console.log(e.message)
-        return res.send('')
+        return res.end()
     }
 })
 

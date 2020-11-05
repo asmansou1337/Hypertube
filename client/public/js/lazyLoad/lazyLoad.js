@@ -11,8 +11,6 @@ $( loadForm ).submit(function( e ) {
   loading.style.display = 'block';
   axios.get(`/movies/loadMore?page=${page}`)
     .then((result) => {
-    //   if (typeof result.data.error !== 'undefined') 
-    //           throw new Error(result.data.error)
         if (result.data.end === true) {
             // Hide load more button when reaching the end of list
             loadForm.style.display = 'none';
@@ -41,7 +39,7 @@ $( loadForm ).submit(function( e ) {
         if (watched.length > 0 && watched.includes(movie.imdb_code)) { 
           btn = `<a class="btn-floating btn-action  btn-sm mt-n4 ml-n2 mdb-color  teal lighten-2 waves-effect waves-light"><i class="fas fa-eye"></i></a>`
          } else { 
-          btn = `<a class="btn-floating btn-action  btn-sm mt-n4 ml-n2 mdb-color lighten-1 waves-effect waves-light"><i class="fas fa-eye-slash"></i></a>`
+          btn = `<a class="btn-floating btn-action  btn-sm mt-n4 ml-n2 mdb-color watchBtn waves-effect waves-light"><i class="fas fa-eye-slash"></i></a>`
        }} 
 
     content += `<div class="col-lg-3 col-md-6 col-sm-12 p-3">
