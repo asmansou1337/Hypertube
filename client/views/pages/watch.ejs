@@ -10,9 +10,9 @@
 
     <div class="player" id="<%= movie.imdb_code %>">
         <div class="card card-image" style="background-image: url('<%= movie.large_cover_image %>');">
-          <div id="<%= movie.id %>" class="card-body rgba-black-strong videoContainer" style="display: none;">
+          <div id="<%= movie.id %>" class="card-body rgba-black-strong videoContainer">
             <div class="container flex-center text-center">
-              <!-- <div id="moviePlayer" class="embed-responsive embed-responsive-21by9">
+              <div id="moviePlayer" class="embed-responsive embed-responsive-21by9">
                 <video 
                 id="my-video"
                 class="video-js"
@@ -25,7 +25,7 @@
                 <source src="http://localhost:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/mp4" />
                 <source src="http://localhost:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/webm" />
               </video>
-              </div> -->
+              </div>
               </div>
           </div>
         </div>
@@ -245,12 +245,12 @@
 
       function getComments(){
         var id = document.getElementsByClassName('player')[0] && document.getElementsByClassName('player')[0].id
-        var $commentsContainer = document.getElementById('commentsContainer')
+        var commentsContainer = document.getElementById('commentsContainer')
         axios.get('/comments/view/'+ id+'').then((res) => {
-            if(res.data && Array.isArray(res.data) && $commentsContainer)
+            if(res.data && Array.isArray(res.data) && commentsContainer)
               res.data.forEach(element => {
                 if(element.userId && element.profileImg && element.username && element.content)
-                  $commentsContainer.innerHTML += '\
+                  commentsContainer.innerHTML += '\
                   <li class="media mt-2">\
                   <a href="/users/view/'+element.userId+'">\
                   <img class="rounded-circle small_avatar d-flex mr-3" src="'+ element.profileImg +'"\"\
@@ -266,12 +266,13 @@
           return toastr.error(e);
         })
       }
+
       getComments()
 
       function postComment(){
         var id = document.getElementsByClassName('player')[0] && document.getElementsByClassName('player')[0].id
         var comment = document.getElementById('myComment') &&  document.getElementById('myComment').value
-        var $commentsContainer = document.getElementById('commentsContainer')
+        var commentsContainer = document.getElementById('commentsContainer')
         const data = {
           comment
         }
@@ -281,7 +282,7 @@
                 if(res && res.data && res.data.error)
                     toastr.error(res.data.error);
                 if(res && res.data && res.data.content && res.data.username && res.data.profileImg){
-                  $commentsContainer.innerHTML = ''
+                  commentsContainer.innerHTML = ''
                   document.getElementById('myComment').value = ''
                   getComments()
                 }                 

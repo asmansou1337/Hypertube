@@ -5,4 +5,4 @@ WORKDIR /server
 COPY package.json ./
 COPY package-lock.json ./
 RUN npm install nodemon -g
-RUN npm install
+ENTRYPOINT npm install
