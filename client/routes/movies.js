@@ -4,12 +4,13 @@ const moviesController = require("../controller/movies.js")
 const Dictionary = require('../libraries/dictionary')
 const verifyAuth = require('../middlewares/auth')
 const checkUrl = require('../helpers/checkUrl');
+const lang = require('../middlewares/setLanguage')
 
 nbrPage = null
 params = null
 
 // Browse Movies
-moviesRouter.get('/', verifyAuth, async (req, res) => {
+moviesRouter.get('/', verifyAuth, lang, async (req, res) => {
     try {
         let page = 1;
         params = {
@@ -37,7 +38,7 @@ moviesRouter.get('/', verifyAuth, async (req, res) => {
 })
 
 // Search A Movie with filter & sort options
-moviesRouter.post('/', verifyAuth, async (req, res) => {
+moviesRouter.post('/', verifyAuth, lang, async (req, res) => {
     try {
         let page = 1;
         params = {
@@ -58,7 +59,7 @@ moviesRouter.post('/', verifyAuth, async (req, res) => {
 })
 
 // Load More Option
-moviesRouter.get('/loadMore', verifyAuth, async (req, res) => {
+moviesRouter.get('/loadMore', verifyAuth, lang, async (req, res) => {
     try {
         let page = req.query.page
         let final = false
@@ -79,7 +80,7 @@ moviesRouter.get('/loadMore', verifyAuth, async (req, res) => {
 })
 
 // Movie detail page
-moviesRouter.get('/watch/:id', verifyAuth, async (req, res, next) => {
+moviesRouter.get('/watch/:id', verifyAuth, lang, async (req, res, next) => {
     try {
     const id = req.params.id
     const movie = await moviesController.movieDiscover(id)
@@ -119,12 +120,12 @@ moviesRouter.get('/captions/:id', verifyAuth, async (req, res) => {
         return res.send(caption)
     } catch (e) {
        console.log(e.message)
-        return res.end()
+       return res.end()
     }
 })
 
 // Add to watched list after finishing the movie
-moviesRouter.post('/:imdb/watched', verifyAuth, async (req, res) => {
+moviesRouter.post('/:imdb/watched', verifyAuth, lang, async (req, res) => {
     try {
         const result = await moviesController.movieAddToWatched(req.params.imdb, req.user.id)
         return res.send(result)
@@ -136,7 +137,7 @@ moviesRouter.post('/:imdb/watched', verifyAuth, async (req, res) => {
 })
 
 // Add/remove from watchlist for later
-moviesRouter.post('/:imdb/watchlist', verifyAuth, async (req, res) => {
+moviesRouter.post('/:imdb/watchlist', verifyAuth, lang, async (req, res) => {
     try {
         const result = await moviesController.movieAddToWatchList(req.params.imdb, req.user.id)
         return res.send(result)
@@ -148,7 +149,7 @@ moviesRouter.post('/:imdb/watchlist', verifyAuth, async (req, res) => {
 })
 
 // Add/Remove from favorites
-moviesRouter.post('/:imdb/favorites', verifyAuth, async (req, res) => {
+moviesRouter.post('/:imdb/favorites', verifyAuth, lang, async (req, res) => {
     try {
         const result = await moviesController.movieAddToFavorites(req.params.imdb, req.user.id)
         return res.send(result)
@@ -159,61 +160,68 @@ moviesRouter.post('/:imdb/favorites', verifyAuth, async (req, res) => {
     }
 })
 
-moviesRouter.get('/favorites', async (req,res) => {
-    const title = req.user && req.user.language === 'fr' ? 'Favoris' : 'Favorites'
-    const Wrong = req.user && req.user.language === 'fr' ? 'Quelque chose a mal tourné ...' : 'Something Went Wrong...'
-    const none = req.user && req.user.language === 'fr' ? 'Pas encore de favoris!' : 'No Favorites Yet !'
+moviesRouter.get('/myMovies', verifyAuth, lang, async (req,res) => {
+    // const title = req.user && req.user.language === 'fr' ? 'Favoris' : 'Favorites'
+    const wrong = req.user && req.user.language === 'fr' ? 'Quelque chose a mal tourné ...' : 'Something Went Wrong...'
+    const noFavorites = req.user && req.user.language === 'fr' ? 'Pas encore de favoris!' : 'No Favorites Yet !'
+    const noWatched = req.user && req.user.language === 'fr' ? 'Pas encore d\'historique, regardez des films!' : 'No watch history yet, watch some movies !'
+    const noWatchlist = req.user && req.user.language === 'fr' ? 'Pas encore de liste, ajoutez quelques films!' : 'No watchlist yet, add some movies !'
+    let error = {};
     try {
-        if(!req.user)
-            return res.render('pages/watchList', {title, error: "No User", movies: undefined})
         if(!req.user.favorites || req.user.favorites.length == 0)
-            return res.render('pages/watchList', {title, error: none, movies: undefined})
-        const movies = await moviesController.movieInfoByIds(req.user.favorites)
-        return res.render('pages/watchList', {title,error: undefined, movies})
+            error.noFavorites = noFavorites
+        if(!req.user.watched || req.user.watched.length == 0)
+            error.noWatched = noWatched
+        if(!req.user.watchlist || req.user.watchlist.length == 0)
+            error.noWatchlist = noWatchlist
+        // const favorites = await moviesController.movieInfoByIds(req.user.favorites)
+        // const watchlist = await moviesController.movieInfoByIds(req.user.watchlist)
+        // const watched = await moviesController.movieInfoByIds(req.user.watched)
+        return res.render('pages/myMoviesList', {favorites: req.user.favorites, watchlist: req.user.watchlist, watched: req.user.watched, error})
     }
     catch (e) {
         console.log(e.message)
-        return res.render('pages/watchList', {title, error: Wrong, movies: undefined})
+        return res.render('pages/myMoviesList', {error: {error: wrong}})
     }
 })
 
 // A middlware to verify if user is connected should be added
-moviesRouter.get('/watched', async (req,res) => {
-    const title = req.user && req.user.language === 'fr' ? 'Historique des films' : 'Watched Movies'
-    const Wrong = req.user && req.user.language === 'fr' ? 'Quelque chose a mal tourné ...' : 'Something Went Wrong...'
-    const none = req.user && req.user.language === 'fr' ? 'Pas encore d\'historique, regardez des films!' : 'No watch history yet, watch some movies !'
-    try {
-        if(!req.user)
-            return res.render('pages/watchList', {title, error: "No User", movies: undefined})
-        if(!req.user.watched || req.user.watched.length == 0)
-            return res.render('pages/watchList', {title, error: none, movies: undefined})
-        const movies = await moviesController.movieInfoByIds(req.user.watched)
-        return res.render('pages/watchList', {title,error: undefined, movies})
-    }
-    catch (e) {
-        console.log(e.message)
-        return res.render('pages/watchList', {title, error: Wrong, movies: undefined})
-    }
-})
-moviesRouter.get('/watchlist', async (req,res) => {
-    const title = req.user && req.user.language === 'fr' ? 'List des Films' : 'Watch List'
-    const Wrong = req.user && req.user.language === 'fr' ? 'Quelque chose a mal tourné ...' : 'Something Went Wrong...'
-    const none = req.user && req.user.language === 'fr' ? 'Pas encore de liste, ajoutez quelques films!' : 'No watchlist yet, add some movies !'
-    try {
-        /// the imdb api is limited by 1000 requests a day
-        // const TEST_USER_FAVS = ['tt0090190', 'tt0803093']
-        // const results = await moviesController.movieInfoByIds(TEST_USER_FAVS)
-        if(!req.user)
-            return res.render('pages/watchList', {title, error: "No User", movies: undefined})
-        if(!req.user.watchlist || req.user.watchlist.length == 0)
-            return res.render('pages/watchList', {title, error: none, movies: undefined})
-        const movies = await moviesController.movieInfoByIds(req.user.watchlist)
-        return res.render('pages/watchList', {title,error: undefined, movies})
-    }
-    catch (e) {
-        console.log(e.message)
-        return res.render('pages/watchList', {title, error: Wrong, movies: undefined})
-    }
-})
+// moviesRouter.get('/watched', async (req,res) => {
+//     const title = req.user && req.user.language === 'fr' ? 'Historique des films' : 'Watched Movies'
+//     const Wrong = req.user && req.user.language === 'fr' ? 'Quelque chose a mal tourné ...' : 'Something Went Wrong...'
+//     const none = req.user && req.user.language === 'fr' ? 'Pas encore d\'historique, regardez des films!' : 'No watch history yet, watch some movies !'
+//     try {
+//         if(!req.user)
+//             return res.render('pages/watchList', {title, error: "No User", movies: undefined})
+//         if(!req.user.watched || req.user.watched.length == 0)
+//             return res.render('pages/watchList', {title, error: none, movies: undefined})
+//         const movies = await moviesController.movieInfoByIds(req.user.watched)
+//         return res.render('pages/watchList', {title,error: undefined, movies})
+//     }
+//     catch (e) {
+//         console.log(e.message)
+//         return res.render('pages/watchList', {title, error: Wrong, movies: undefined})
+//     }
+// })
+// moviesRouter.get('/watchlist', async (req,res) => {
+//     const title = req.user && req.user.language === 'fr' ? 'List des Films' : 'Watch List'
+//     const Wrong = req.user && req.user.language === 'fr' ? 'Quelque chose a mal tourné ...' : 'Something Went Wrong...'
+//     const none = req.user && req.user.language === 'fr' ? 'Pas encore de liste, ajoutez quelques films!' : 'No watchlist yet, add some movies !'
+//     try {
+//         /// the imdb api is limited by 1000 requests a day
+//         // const TEST_USER_FAVS = ['tt0090190', 'tt0803093']
+//         // const results = await moviesController.movieInfoByIds(TEST_USER_FAVS)
+//         if(!req.user)
+//             return res.render('pages/watchList', {title, error: "No User", movies: undefined})
+//         if(!req.user.watchlist || req.user.watchlist.length == 0)
+//             return res.render('pages/watchList', {title, error: none, movies: undefined})
+//         const movies = await moviesController.movieInfoByIds(req.user.watchlist)
+//         return res.render('pages/watchList', {title,error: undefined, movies})
+//     }
+//     catch (e) {
+//         console.log(e.message)
+//         return res.render('pages/watchList', {title, error: Wrong, movies: undefined})
+//     }
+// })
 
 module.exports = moviesRouter

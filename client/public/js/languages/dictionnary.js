@@ -71,6 +71,7 @@ var arrLang = {
         'download-count' : 'Downloads',
         'asc': "Ascending",
         'desc': "Descending",
+        'done': "Done",
         'actors': "Actors",
         'description': "Description",
         'comment-placeholder': "Write something here...",
@@ -78,6 +79,7 @@ var arrLang = {
         'add-to-watched': "Mark As Watched",
         'add-to-favorites': "Add to My Favorites",
         'comments': 'Comments',
+        'ChooseTorrents': "Select your torrent",
         'movie-infos': "Movie Infos",
         'load-more' : 'Load More',
         'not-found-movies' : 'No Movies Found',
@@ -86,7 +88,8 @@ var arrLang = {
         'watched': 'Watched',
         'sorry': 'Sorry About That',
         'name': 'Name',
-        'statistics': 'Statistics'
+        'statistics': 'Statistics',
+        'myMovies': 'My Movies',
     },
     'fr': {
         'sign-up': "S'inscrire",
@@ -160,6 +163,7 @@ var arrLang = {
         'download-count' : 'Téléchargement',
         'asc': "Ascendant",
         'desc': "Descendant",
+        'done': "Confirmer",
         'actors': "Acteurs",
         'description': "Déscription",
         'comment-placeholder': "Donnez Votre Avis...",
@@ -167,6 +171,7 @@ var arrLang = {
         'add-to-watched': "Marquer Comme Vu",
         'add-to-favorites': "Ajouter à mes favoris",
         'comments': 'Commentaires',
+        'ChooseTorrents': "Sélectionnez votre torrent",
         'movie-infos': "Informations du film",
         'load-more' : 'Charger Plus',
         'not-found-movies' : 'Aucun film trouvé',
@@ -175,6 +180,7 @@ var arrLang = {
         'watched': 'Films Regardé',
         'sorry': 'J\'en suis désolé.',
         'name': 'Nom',
-        'statistics': 'Statistiques'
+        'statistics': 'Statistiques',
+        'myMovies': 'Mes Films',
     }
 };

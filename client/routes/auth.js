@@ -47,7 +47,7 @@ authRouter.get("/fortytwo/redirect",passport.authenticate("42" , { failureRedire
 // END Facebook Auth
 
 authRouter.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/auth/login' }),(req, res) => {
-  res.cookie('lang',req.user.language)
+  res.cookie('lang', req.user.language)
   res.redirect('/movies');
 });
 
@@ -59,6 +59,7 @@ authRouter.get("/login",lang, async (req, res) => {
    const results = msg.result || []
   res.render("pages/auth", {errors,results});
 });
+
 authRouter.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/auth/login");

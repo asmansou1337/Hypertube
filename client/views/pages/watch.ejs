@@ -12,7 +12,7 @@
         <div class="card card-image" style="background-image: url('<%= movie.large_cover_image %>');">
           <div id="<%= movie.id %>" class="card-body rgba-black-strong videoContainer">
             <div class="container flex-center text-center">
-              <div id="moviePlayer" class="embed-responsive embed-responsive-21by9">
+              <!-- <div id="moviePlayer" class="embed-responsive embed-responsive-21by9">
                 <video 
                 id="my-video"
                 class="video-js"
@@ -25,7 +25,7 @@
                 <source src="http://localhost:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/mp4" />
                 <source src="http://localhost:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/webm" />
               </video>
-              </div>
+              </div> -->
               </div>
           </div>
         </div>
@@ -134,44 +134,21 @@
                   </div>
                 </div>
               </div>
-              <!-- Movie Infos -->
-              <div class="tab-content mt-4">
+              <!-- Movie Comments -->
+              <div class="row tab-content mt-4">
                  <!-- Add New Comment -->
-                 <!-- <ul class="list-unstyled">
-                  <li class="media">
-                    <div class="row media-body">
-                      <div class="col-10">
-                        <div class="md-form"> 
-                          <textarea id="myComment" class="md-textarea text-light form-control" style="resize: none;" rows="1" name="comment"></textarea>
-                        </div>
-                      </div>
-                      <div class="col-2">
-                        <button type="button" onclick="postComment()" class="btn btn-light mt-5 btn-block"><i class="fas fa-comment"></i></button>
-                      </div>
-                    </div>
-                  </li>
-                </ul> -->
-                <ul class="list-unstyled" style="display: block;">
-                  <li class="media">
-                  <a href="/users/view/<%= user.userId %>"><img
-                      class="rounded-circle small_avatar z-depth-1-half mr-3 mt-4" style="width: 80px; height: 80px;"
-                      src="<%= user.profileImg %>"
-                      alt="<%= user.username %>"
-                  /></a>
-                  <div class="row media-body">
-                    <div class="col-10">
-                      <div class="md-form"> 
-                        <textarea id="myComment" class="md-textarea form-control white-text" style="resize: none;" name="comment" rows="1"></textarea>
-                      </div>
-                    </div>
-                    <div class="col-2">
-                      <button type="button" onclick="postComment()" class="btn mdb-color btnColor btn-rounded mt-5"><i class="fas fa-comment"></i></button>
-                    </div>
+                <div class="mx-2 mt-3 col col-sm-12 col-md-12 col-lg-12 media">
+                <div class="row media-body">
+                  <div class="col col-sm-6 col-md-8 md-form">
+                      <textarea id="myComment" class="md-textarea form-control black-text" style="resize: none;" name="comment" rows="1"></textarea>
                   </div>
-                </li>
-                </ul>
+                  <div class="col col-md-4 col-lg-4 col-sm-6">
+                    <button type="button" onclick="postComment()" class="btn mdb-color btnColor btn-rounded mt-5"><i class="fas fa-comment"></i></button>
+                  </div>
+                </div>
+                </div>
                 
-                <!-- <hr class="my-4 mdb-color lighten-1"/> -->
+                <hr class="my-4 mdb-color lighten-1"/>
                 <!-- Comments  -->    
                 <div class="col-sm-12 justify-content-center">
                     <!-- List of comments -->
@@ -194,17 +171,17 @@
          $('[data-toggle="tooltip"]').tooltip()
        })
    </script>
-   <script src="https://vjs.zencdn.net/7.7.6/video.js"></script>
+   <!-- <script src="https://vjs.zencdn.net/7.7.6/video.js"></script>
    <script src="/js/video/player/lang/fr.js"></script>
-   <script src="/js/video/playerSettings.js"></script>
+   <script src="/js/video/playerSettings.js"></script> -->
     <script>
 
-      function addToFavorites(id){
+      async function addToFavorites(id){
         if(!id)
           return
-        axios.post('/movies/'+ id +'/favorites').then((res) => {
+        await axios.post('/movies/'+ id +'/favorites').then((res) => {
           if(res.data && res.data.Message){
-            document.getElementsByName(id)[0] && document.getElementsByName(id)[0].classList.toggle("teal");
+            document.getElementsByName(id)[0] && document.getElementsByName(id)[0].classList.replace('btnColorGrey', 'btnColorTeal');
             return toastr.success(res.data.Message);
           }
           else
@@ -214,12 +191,12 @@
         })
       }
 
-      function addToWatchList(id){
+      async function addToWatchList(id){
         if(!id)
           return
-        axios.post('/movies/'+ id +'/watchlist').then((res) => {
+        await axios.post('/movies/'+ id +'/watchlist').then((res) => {
           if(res.data && res.data.Message){
-            document.getElementsByName(id)[1] && document.getElementsByName(id)[1].classList.toggle("teal");
+            document.getElementsByName(id)[1] && document.getElementsByName(id)[1].classList.replace('btnColorGrey', 'btnColorTeal');
             return toastr.success(res.data.Message);
           }
           else
@@ -228,12 +205,12 @@
           return toastr.error(e);
         })
       }
-      function addToWatched(id){
+      async function addToWatched(id){
         if(!id)
           return
-        axios.post('/movies/'+ id +'/watched').then((res) => {
+        await axios.post('/movies/'+ id +'/watched').then((res) => {
           if(res.data && res.data.Message){
-            document.getElementsByName(id)[2] && document.getElementsByName(id)[2].classList.add("teal");
+            document.getElementsByName(id)[2] && document.getElementsByName(id)[2].classList.replace('btnColorGrey', 'btnColorTeal');
             return toastr.success(res.data.Message);
           }
           else
@@ -258,6 +235,7 @@
                   </a>\
                   <div class="media-body">\
                     <h5 class="mt-0 font-weight-bold black-text">'+ element.username +'</h5>\
+                    <h6 class="mt-0 black-text">'+ element.date +'</h6>\
                     <p class="text-break">'+ element.content+'</p>\
                   </div>\
                   </li>'

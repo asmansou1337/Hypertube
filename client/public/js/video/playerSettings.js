@@ -11,16 +11,12 @@ myPlayer.addClass("vjs-styling");
 
 myPlayer.on('error', function() {
 toastr.error(`${(getCookie('lang') == 'fr') ? 'Le video n\'a pas pu être chargé' : 'The media could not be loaded'}`);
-// setTimeout(function(){
-//  document.querySelector('.videoContainer').style.display = 'none';
-// }, 7000)
 });
 
 var errorDisplay = myPlayer.getChild('errorDisplay');
 errorDisplay.off(myPlayer, 'error', errorDisplay.open);
    
    function loadTorrent(hash) {
-    //  document.querySelector('.videoContainer').style.display = 'block';
      var movieId = document.getElementsByClassName('videoContainer') && document.getElementsByClassName('videoContainer')[0].id
      myPlayer.src(
      {

@@ -3,17 +3,11 @@
 
 <head>
   <%- include ('../partials/head.ejs') %>
+  <link rel="stylesheet" href="/css/styles/homeStyle.css">
 </head>
 
 <body class="backStyle d-flex flex-column min-vh-100">
-
-   <!--Navbar -->
- <nav class="mb-1 navbar navbar-expand-lg navbar-dark mdb-color darken-2 mb-0">
-  <a class="navbar-brand" href="/movies/">
-    <img style="width: 150px;" src="/images/logo.png" alt="" />
-  </a>
-</nav>
-<!--/.Navbar -->
+  <%- include ('../partials/navbar') %>
   <div class="container wrapper flex-grow-1">
     <div class="jumbotron text-center mdb-color lighten-4 mt-5">
       <h2 class="card-title h2 lang" key="error">Error</h2>
@@ -28,6 +22,7 @@
     </div>
   </div>
   <%- include ('../partials/scripts.ejs') %>
+  <%- include('../partials/footer.ejs') %>
 </body>
 
 </html>

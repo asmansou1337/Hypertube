@@ -2,9 +2,8 @@
 
 <html>
 <%- include ('../partials/head.ejs') %>
-<link type="text/css" rel="stylesheet" href='/css/styles/editProfile.css' />
-
-<body class="grey d-flex flex-column min-vh-100">
+<link rel="stylesheet" href="/css/styles/homeStyle.css">
+<body class="backStyle d-flex flex-column min-vh-100">
     <%- include ('../partials/navbar') %>
         <div class="container wrapper flex-grow-1 py-4">
             <% if(typeof errors != 'undefined'){ %>
@@ -29,78 +28,110 @@
             </div>
             <% } %>
             <% } %>
-            <div class="row">
-                <div class="col-12">
-                    <!-- Tabs content -->
-                    <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade shadow rounded text-white  show active p-5" id="v-pills-home"
-                            role="tabpanel" aria-labelledby="v-pills-home-tab">
-                            <div class="row">
-                                <div class="col-12">
-                                    <a href="#" class="profile-pic">
-                                        <div class="profile-pic"
-                                            style="background-image: url('<%=   user.profileImg   %>')"
-                                            onclick="select()" id="pictureProfile">
-                                            <!-- <img class=" circle responsive-img" style="width: 25%;height: 100%;" src="/images/profile.jpg"> -->
-                                            <span class="fa fa-camera"></span>
-                                            <span class="lang" key="change-image">Change Image</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <form action="/users/upload" enctype="multipart/form-data" method="POST">
-                                        <input type="file" class="file" id="profile" name="profile" accept="image/*"
-                                        style="display:none;" onchange="displayProfile(this)" />
-                                        <br>
-                                        <button class="btn text-light mdb-color btn-rounded ml-2 lang" key="update">
-                                            Update
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
 
-                            <div class="row mt-5">
-                                <div class="col-12">
-                                    <form class="form-horizontal" method="POST" action="/users/me">
-                                        <label for="First_name" class="lang" key="first-name">First Name</label>
-                                        <input type="text" class="form-control" id="First_name"
-                                            value="<%= ( typeof user.firstname != 'undefined') ?  user.firstname  : '' %>"
-                                            name="firstname">
-                                        <br>
-                                        <label for="Last_name" class="lang" key="last-name">Last Name</label>
-                                        <input type="text" class="form-control" id="Last_name"
-                                            value="<%= ( typeof user.lastname != 'undefined') ?  user.lastname  : '' %>"
-                                            name="lastname">
-                                        <br>
-                                        <label for="Email" class="lang" key="email">Email</label>
-                                        <input type="email" class="form-control" id="email"
-                                            value="<%= ( typeof user.email != 'undefined') ?  user.email  : '' %>"
-                                            name="email">
-                                        <br>
-                                        <label for="Username" class="lang" key="username">Username</label>
-                                        <input type="text" class="form-control" id="username"
-                                            value="<%= ( typeof user.username != 'undefined') ?  user.username  : '' %>"
-                                            name="username">
-                                        <br>
-                                        <div class="input-field col s12">
-                                            <select class="mdb-select md-form" name="language">
-                                                <option value="en" <%= ( typeof user.language != 'undefined' && user.language == 'en') ? 'selected'  : '' %> class="lang" key="english">English</option>
-                                                <option value="fr" <%= ( typeof user.language != 'undefined' && user.language == 'fr') ? 'selected'  : '' %> class="lang" key="french">French</option>
-                                            </select>
-                                        </div>
-                                        <br>
-                                        <button class="btn text-light mdb-color darken-3 btn-rounded lang"
-                                            key="save-change"
-                                            >
-                                            Save Change
-                                        </button>
-                                    </form>
+            <ul class="nav md-pills nav-justified mb-4">
+                <li class="nav-item pl-0">
+                  <a class="nav-link active lang" data-toggle="tab" href="#panel104" role="tab" key="profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link lang" data-toggle="tab" href="#panel105" role="tab" key="password">Password</a>
+                </li>
+              </ul>
+            <div class="tab-content card white-text">
+                <!-- Basic Infos Panel-->
+                <div class="tab-pane fade in show active" id="panel104" role="tabpanel">
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="#" class="profile-pic">
+                                <div class="profile-pic"
+                                    style="background-image: url('<%=   user.profileImg   %>')"
+                                    onclick="select()" id="pictureProfile">
+                                    <!-- <img class=" circle responsive-img" style="width: 25%;height: 100%;" src="/images/profile.jpg"> -->
+                                    <span class="fa fa-camera"></span>
+                                    <span class="lang" key="change-image">Change Image</span>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <form action="/users/upload" enctype="multipart/form-data" method="POST">
+                                <input type="file" class="file" id="profile" name="profile" accept="image/*"
+                                style="display:none;" onchange="displayProfile(this)" />
+                                <br>
+                                <button class="btn text-light mdb-color btnColor btn-rounded ml-2 lang" key="update">
+                                    Update
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <form class="form-horizontal" method="POST" action="/users/me">
+                                <label for="First_name" class="lang" key="first-name">First Name</label>
+                                <input type="text" class="form-control" id="First_name"
+                                    value="<%= ( typeof user.firstname != 'undefined') ?  user.firstname  : '' %>"
+                                    name="firstname">
+                                <br>
+                                <label for="Last_name" class="lang" key="last-name">Last Name</label>
+                                <input type="text" class="form-control" id="Last_name"
+                                    value="<%= ( typeof user.lastname != 'undefined') ?  user.lastname  : '' %>"
+                                    name="lastname">
+                                <br>
+                                <label for="Email" class="lang" key="email">Email</label>
+                                <input type="email" class="form-control" id="email"
+                                    value="<%= ( typeof user.email != 'undefined') ?  user.email  : '' %>"
+                                    name="email">
+                                <br>
+                                <label for="Username" class="lang" key="username">Username</label>
+                                <input type="text" class="form-control" id="username"
+                                    value="<%= ( typeof user.username != 'undefined') ?  user.username  : '' %>"
+                                    name="username">
+                                <br>
+                                <div class="input-field col s12">
+                                    <select class="mdb-select md-form" name="language">
+                                        <option value="en" <%= ( typeof user.language != 'undefined' && user.language == 'en') ? 'selected'  : '' %> class="lang" key="english">English</option>
+                                        <option value="fr" <%= ( typeof user.language != 'undefined' && user.language == 'fr') ? 'selected'  : '' %> class="lang" key="french">French</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <button class="btn text-light btnColor btn-rounded lang"
+                                    key="save-change"
+                                    >
+                                    Save Change
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--Password Panel-->
+                <div class="tab-pane fade in" id="panel105" role="tabpanel">
+                    <form class="form-holder" action="/users/change" method="POST">
+                        <!-- Old Password -->
+                        <label for="old-password" class="lang" key="old-password">Old Password</label>
+                        <input type="password" class="form-control" id="old-password" name="old" aria-describedby="old-password">
+                        <br>
+                        <!-- New Password -->
+                        <label for="new-password" class="lang" key="new-password">New Password</label>
+                        <input type="password" class="form-control" id="new-password" name="new" aria-describedby="new-password">
+                        <small class="form-text text-muted mb-4 lang" 
+                        key="at-least-8-characters-and-1-digit">
+                          At least 8 characters and 1 digit
+                        </small>
+                        <br>
+                        <!-- Confirm Password -->
+                        <label for="confirm-password" class="lang" key="confirm-password">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirm-password" name="confirm" aria-describedby="confirm-password">
+                        <small class="form-text text-muted mb-4 lang" 
+                        key="at-least-8-characters-and-1-digit">
+                          At least 8 characters and 1 digit
+                        </small>
+                        <br>
+                      <button class="btn text-light btnColor btn-rounded lang" key="change-password">
+                        change password
+                      </button>
+          
+                    </form>
                 </div>
             </div>
         </div>

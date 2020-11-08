@@ -44,13 +44,14 @@ const Movies = {
             const captions = await axios.get(
                 `${api}/captions/${id}?lang=${lang}`,
                 );
+            // console.log(captions.data)
             return captions.data;
         } catch (e) {
-            if (e.response.status === 404) {
+            if (e.response.status == 404) {
                 // will not show it to the user
-                throw new Error(e.response.data.Message)
+                throw new Error(e.response.data.error)
             }
-            console.log(e.message)
+            // console.log(e.response.data)
             throw new Error(Dictionary().CAPTION_FAILED)
         }
     },

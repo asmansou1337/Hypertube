@@ -27,6 +27,7 @@ module.exports = {
     mailKeys: {
         host: 'smtp.gmail.com',
         port: 587,
+        secure: false,
         auth: {
            user: 'asmansou1337@gmail.com',
            pass: 'FYdNWP)7mP{Q##(6'

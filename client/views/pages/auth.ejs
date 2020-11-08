@@ -79,8 +79,8 @@
 
                             <!-- Email -->
                             <div class="md-form">
-                                <input type="email" id="materialLoginFormEmailSignIn" class="form-control"  name="email" >
-                                <label for="materialLoginFormEmail" class="lang" key="email">E-mail</label>
+                                <input type="text" id="materialLoginFormUsernameSignIn" class="form-control"  name="username" >
+                                <label for="materialLoginFormUsername" class="lang" key="username">Username</label>
                             </div>
                             <br>
                             <!-- Password -->
@@ -193,7 +193,7 @@
                         <!-- Form -->
                         <div class="hr"></div>
                         <div class="foot-lnk">
-                            <label for="tab-1" class="lang" key="already-member">Already Member?</a>
+                            <a href="#"><label for="tab-1" class="lang" key="already-member">Already Member?</a>
                         </div>
                     </div>
                 </div>
@@ -236,7 +236,7 @@
                 if(res && res.data && res.data.success)
                     toastr.success(res.data.success);
             }).catch(e => {
-                    toastr.error('Something Went Wrong');
+                    toastr.error('Oops!!');
             })
         }
         

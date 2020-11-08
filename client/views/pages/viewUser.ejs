@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <%- include ('../partials/head.ejs') %>
+  <head>
+    <%- include ('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/styles/homeStyle.css">
+  </head>
+  
   <body class="backStyle d-flex flex-column min-vh-100">
     <%- include ('../partials/navbar') %>
-    <div class="container wrapper flex-grow-1">
+    <div class="container wrapper flex-grow-1 py-4">
       <div class="row mt-5">
         <!-- Card Narrower -->
-        <div class="card card-cascade narrower stylish-color">
+        <div class="card card-cascade narrower tab-content">
           <!-- Card image -->
+          <!--  https://assets.nflxext.com/ffe/siteui/vlv3/3b48f428-24ed-4692-bb04-bc7771854131/a2cb1e37-759d-4f26-8a30-9c94394d6794/MA-en-20200302-popsignuptwoweeks-perspective_alpha_website_large.jpg -->
           <div class="view view-cascade overlay">
             <img
               class="card-img-top"
-              src=" https://assets.nflxext.com/ffe/siteui/vlv3/3b48f428-24ed-4692-bb04-bc7771854131/a2cb1e37-759d-4f26-8a30-9c94394d6794/MA-en-20200302-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+              src="https://assets.nflxext.com/ffe/siteui/vlv3/3b48f428-24ed-4692-bb04-bc7771854131/a2cb1e37-759d-4f26-8a30-9c94394d6794/MA-en-20200302-popsignuptwoweeks-perspective_alpha_website_large.jpg"
               alt="Card image cap"
             />
             <a>
@@ -22,7 +27,7 @@
           <!-- Card content -->
           <div class="card-body card-body-cascade">
             <!-- Card -->
-            <div class="card testimonial-card stylish-color-dark">
+            <div class="card testimonial-card tab-content-dark">
               <!-- Avatar -->
               <div class="avatar mx-auto white">
                 <img
@@ -41,7 +46,7 @@
                 <br />
                 <div class="row">
                   <div class="col-12">
-                    <h5 class=" d-flex blue-text justify-content-center lang" key="name">Name</h5>
+                    <h5 class=" d-flex cyan-text justify-content-center lang" key="name">Name</h5>
                       <h5 class="white-text justify-content-center">
                         <i class="fas blue-grey-text fa-user-alt fa-fw"></i>
                         <%= user && user.firstname %> <%= user && user.lastname %>

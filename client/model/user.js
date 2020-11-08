@@ -98,7 +98,13 @@ const userSchema = new Schema({
 
     token:String,
 
-    language: String,
+    language: {
+        type: String,
+        validate(value){
+            if(value !== 'fr' && value !== 'en') 
+                throw new Error(Dictionary().ERR_LANG)
+        }
+    },
 
     favorites: Array,
 

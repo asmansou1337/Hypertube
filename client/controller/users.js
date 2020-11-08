@@ -15,13 +15,13 @@ const User = {
     // check every element of body if it has the allowed array elements returns false if one element doest correspond
     const isValidOperation = Body.every((element) => Allowed.includes(element))
     if(!isValidOperation)
-        // throw new Error("Not a valid operation Element not Allowed")
+        // Not a valid operation Element not Allowed
         throw new Error(Dictionary().INVALID_OPERATION)
     if(Body.length != Allowed.length)
-        // throw new Error("One or More element(s) is/are missing...")
+        // One or More element(s) is/are missing
         throw new Error(Dictionary().ELMENTS_MISSING)
     if(user.password !== user.confirm)
-        // throw new Error("Passwords do not match")
+        // Passwords do not match
         throw new Error(Dictionary().PASS_NOT_MATCH)
       const found = await userModel.findOne( { $or:[{username:user.username}, {email:user.email} ]})
         if(!found){
@@ -58,13 +58,12 @@ const User = {
         }
         else {
           if(found.username == user.username && found.username)
-            // throw new Error("An account by same Username Already exists")
+            // An account by same Username Already exists
             throw new Error(Dictionary().UNAME_AEXISTS)
           if(found.email == user.email && found.email)
-            // throw new Error("An account by same Email Already exists")
+            // An account by same Email Already exists
             throw new Error(Dictionary().EMAIL_AEXISTS)
           else 
-            // throw new Error("Something Went Wrong !, error: UREG2")
             throw new Error(Dictionary().SWW_UREG2)
         }
       }
@@ -81,24 +80,24 @@ const User = {
       const isValidOperation = Body.every((element) => Allowed.includes(element))
 
       if(!isValidOperation)
-          // throw new Error("Not a valid operation Element not Allowed")
+          // Not a valid operation Element not Allowed
           throw new Error(Dictionary().INVALID_OPERATION)
       if(Body.length != Allowed.length)
-          // throw new Error("One or More element(s) is/are missing...")
+          // One or More element(s) is/are missing
           throw new Error(Dictionary().ELMENTS_MISSING)
       if(data.password !== data.confirm)
-          // throw new Error("Passwords do not match")
+          // Passwords do not match
           throw new Error(Dictionary().PASS_NOT_MATCH)
 
       /// to validate token using validator lib
       const user = await userModel.findOne({token:data.token})
       if(!user) 
-        // throw new Error("User Not Found !")
+        // User Not Found !
         throw new Error(Dictionary().USER_NOT_FOUND)
 
       
       if(!user.verified)
-        // throw new Error("Activate Account first !")
+        // Activate Account first
         throw new Error(Dictionary().ACTIVATE_ACCOUNT)
 
 
@@ -124,10 +123,10 @@ const User = {
         const found = await userModel.findOne( { $or:[{username:user.username}, {email:user.email} ]})
 
         if(found && found.username == user.username && found._id != id.toString())
-            // throw new Error("An account by same Username Already exists")
+            // An account by same Username Already exists
             throw new Error(Dictionary().UNAME_AEXISTS)
         if(found && found.email == user.email && found._id != id.toString())
-            // throw new Error("An account by same Email Already exists")
+            // An account by same Email Already exists
             throw new Error(Dictionary().EMAIL_AEXISTS)
         console.log('A user by the same username or email does not exist...')
       }
@@ -235,19 +234,15 @@ const User = {
   userUpdatePic: async (profileImg, id) => {
     try{
       if(!profileImg)
-          // throw new Error("invalid Picture Path")
           throw new Error(Dictionary().INVALID_PICTURE_PATH)
 
       if(!id)
-        // throw new Error("Something went wrong...")
         throw new Error(Dictionary().SOMETHING_WENT_WRONG)
 
 
       const user = await userModel.findByIdAndUpdate(id, {profileImg}, { new: true, runValidators: true })
       if(!user) 
-        // throw new Error("User Not Found !")
         throw new Error(Dictionary().USER_NOT_FOUND)
-
 
       return user
     }
@@ -259,13 +254,13 @@ const User = {
   userConfirm: async (token) => {
     try{
       if(!token)
-          // throw new Error("Not a valid operation invalid Token ")
+          // invalid Token
           throw new Error(Dictionary().NOT_VALID_TOKEN)
 
 
       const user = await userModel.findOne({token})
       if(!user) 
-        // throw new Error("User Not Found !")
+        // User Not Found !
         throw new Error(Dictionary().USER_NOT_FOUND)
       
       if(!user.verified){
@@ -273,11 +268,11 @@ const User = {
         await user.save()
       }
       else 
-        // throw new Error("Account Already Confirmed..")
+        // Account Already Confirmed
         throw new Error(Dictionary().ACCOUNT_ACONFIRMED)
 
 
-      await  mailHandler.sendConfirmation(user.email, user.name)
+      await  mailHandler.sendConfirmed(user.email, user.name)
       return true
     }
     catch(e){
@@ -288,20 +283,19 @@ const User = {
   userSendForgot : async (body) => {
     try{
       if(!body.email)
-          // throw new Error("Not a valid operation Element not Allowed")
+          // Not a valid operation Element not Allowed
           throw new Error(Dictionary().INVALID_OPERATION)
       if(Object.keys(body).length != 1)
-          // throw new Error("element(s) not Allowed")
+          // element(s) not Allowed
           throw new Error(Dictionary().ELEMENT_NOT_ALLOWED)
 
       const user = await userModel.findOne({email:body.email})
       if(!user) 
-        // throw new Error("User Not Found !")
+        // User Not Found
         throw new Error(Dictionary().USER_NOT_FOUND)
 
-      
       if(!user.verified)
-          // throw new Error("Activate Account first !")
+          // Activate Account first 
           throw new Error(Dictionary().ACTIVATE_ACCOUNT)
 
     

@@ -77,14 +77,13 @@ passport.use(new GitHubStrategy(
 ));
 
 passport.use(new LocalStrategy({
-  /// local strategy mainly uses username this is a workround the issue
-  usernameField: 'email',
+  usernameField: 'username',
   passwordField: 'password',
   passReqToCallback: true
 },
   async (req, username, password, done) => {
     try {
-      await User.findOne({ email: username }, async (err, user) => {
+      await User.findOne({ username: username }, async (err, user) => {
       if (err) return done(null, false,req.flash('error',e));
       if (!user) return done(null, false,  req.flash('error','USER_NOT_FOUND'));
       if(!user.password) return done(null, false,  req.flash('error','ERR_PASS'));
@@ -95,7 +94,6 @@ passport.use(new LocalStrategy({
       user.jwt = token;
       await user.save();
       console.log("A Local User Exists...", { jwt: token });
-
       return done(null, user);
     });
     }

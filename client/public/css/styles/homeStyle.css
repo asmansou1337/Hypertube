@@ -42,6 +42,10 @@
     background-color: #1A3C40 !important;
     color: wheat !important;
   }
+
+  .nav-item {
+    color:  #77A69D !important;
+  }
   
   #addFavorites, #addWatchlist {
     display: inline-block;
@@ -49,6 +53,10 @@
 
   .tab-content {
     background-color: #77A69D !important;
+  }
+
+  .tab-content-dark {
+    background-color: #476b65 !important;
   }
   
   .errorComments {
@@ -75,4 +83,53 @@
     left: 50%;
     margin-left: -1em;
     margin-top: -1em;
+  }
+
+  .profile-pic {
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    color: transparent;
+    border-color: #7d8a98 !important;
+    transition: all .3s ease;
+    text-decoration: none;
+  }
+  
+  .profile-pic:hover {
+    background-color: rgba(0,0,0,.5);
+    z-index: 10000;
+    color: #fff;
+    transition: all .3s ease;
+    text-decoration: none;
+    border-color: #7d8a98 !important;
+    border-width: medium;
+  }
+
+  .profile-pic span {
+    display: inline-block;
+    padding-top: 4em;
+    padding-bottom: 4em;
+  }
+
+  .form-control{
+    color: white;
+    background: transparent;
+    border: transparent;
+    border-bottom: 1px solid white;
+    border-radius: 0rem;
+  }
+  
+  .form-control:focus {
+    color: white;
+    background-color: transparent;
+    box-shadow: 0 0 0 0.2rem transparent    
+  }
+
+  form label {
+    color: #1A3C40 !important;
   }

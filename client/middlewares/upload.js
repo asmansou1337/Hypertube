@@ -14,11 +14,11 @@ const upload = multer({
       fileSize: 5000000
     },
     fileFilter(req, file, cb) {
-      if (!file.originalname.match(/\.(jpeg|jpg)$/)){
+      if (!file.originalname.match(/\.(jpeg|jpg|png)$/)){
         req.fileValidationError = Dictionary().FILE_EXT_ERROR
         return cb(new Error(Dictionary().FILE_EXT_ERROR));
       }
-      if (!file.mimetype === "image/jpeg" || !file.mimetype === "image/jpg"){
+      if (!file.mimetype === "image/jpeg" || !file.mimetype === "image/jpg" || !file.mimetype === "image/png"){
         req.fileValidationError = Dictionary().FILE_ERROR 
         return cb(new Error(Dictionary().FILE_ERROR ));
       }

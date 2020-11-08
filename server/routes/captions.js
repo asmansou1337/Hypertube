@@ -18,7 +18,7 @@ captionsRouter.get('/:id', async (req ,res) => {
     }
     catch(e) {
         console.log(e.message)
-        res.send({error: e.message})
+        res.status(404).send({error: e.message})
     }
 })
 
