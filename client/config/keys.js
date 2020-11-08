@@ -7,8 +7,8 @@ module.exports = {
         clientSecret:'ITd_kLRAixPnvKqEU15hEmzR'
     },
     FortTwo:{
-        clientID: '79cf16e509f898b31f182761b4ef3617ee835d480cfe505fb370b5cd9c37c92e',
-        clientSecret: '6aa1684a13618942ff725cfe1d6c99fc44e6903fd02aa51548e3f58db7eccce4',
+        clientID: '626738476d45bbd5dac31b6721d0d5b1d1db4fec405704edcbdaff58d8b1224d',
+        clientSecret: '14edb0e02574b06bcbdba5d51732fd6f4f9957d17ce31480a5ba98545c889aa5',
         callbackURL: "/auth/fortytwo/redirect"
     },
     Facebook : {
