@@ -3,8 +3,8 @@
 module.exports = {
     google: {
         callbackURL:'/auth/google/redirect',
-        clientID:'871445564025-7imptbihdvlvo2cd5hmd1as6lvuiji3l.apps.googleusercontent.com',
-        clientSecret:'-_DexNE6dEapUEGhcHTcGGJU'
+        clientID:'871445564025-cd05644vmhkc5qk8ofhuu1ipfscvfu61.apps.googleusercontent.com',
+        clientSecret:'HAuNCQ3BQlKxZIXNclOwgRm4'
     },
     FortTwo:{
         clientID: '626738476d45bbd5dac31b6721d0d5b1d1db4fec405704edcbdaff58d8b1224d',
