@@ -33,9 +33,10 @@
           <div class="row">
             <!-- row -->
             <!-- Movie tumbnail -->
-            <% if (favorites) { %> <% favorites.forEach(function(movie){ %>
+            <% if (typeof favorites !== 'undefined' && favorites.length > 0) { %> 
+              <% favorites.forEach(function(movie){ %>
               <!-- News jumbotron -->
-              <div class="jumbotron stylish-color text-center p-4">
+              <div class="jumbotron tab-content-dark text-center m-3">
                 <!-- Grid row -->
                 <div class="row">
                   <!-- Grid column -->
@@ -53,7 +54,6 @@
                     </div>
                   </div>
                   <!-- Grid column -->
-                  <!-- Grid column -->
                   <div class="col-md-7 text-md-left ml-3 mt-3">
                     <!-- Excerpt -->
                     <a href="<%=  favorites && movie.imdburl %>" target="_blank" class="cyan-text">
@@ -65,56 +65,29 @@
                     </h4>
                     <p class="font-weight-normal text-white"> <%= favorites && movie.plot %></p>
                     <p class="font-weight-normal text-white">
-                      <a><strong>Actors: </strong></a
-                      ><%= favorites && movie.actors %>
+                      <p class="font-weight-bold lang" key="actors">Cast</p>
+                      <%= favorites && movie.actors %>
                     </p>
                     <a
-                      class="btn btn-warning"
+                      class="btn btn-warning lang"
                       href="<%=  favorites && movie.imdburl %>"
-                      target="_blank"
+                      target="_blank" key='more-infos'
                       >More Info</a
                     >
                   </div>
-                  <!-- Grid column -->
-                </div>
-                <!-- Grid row -->
-              </div>
-              <!-- News jumbotron -->
-              <% }); %> <% } %>
-
-
-
-            <% if(typeof favorites !== 'undefined' && favorites.length > 0) { 
-                favorites.forEach(movie => { %>
-            <div class="col-lg-3 col-md-6 col-sm-12 p-3">
-              <div class="card collection-card">
-                <div class="view zoom">
-                  <img class="img-fluid" src="<%= movie.large_cover_image || movie.image %>" alt="<%= movie.title %>" />
-                  <div class="stripe dark">
-                    <a href="/movies/watch/<%= movie.id %>" class="stretched-link">
-                      <strong>
-                        <p><%= (typeof movie.title !== 'undefined') ? movie.title : '' %></p>
-                      </strong>
-                      <p>(<%= (typeof movie.year !== 'undefined') ? movie.year : '' %>) <i class="fas fa-star"></i>
-                        <%= (typeof movie.rating !== 'undefined') ? movie.rating : '' %></p>
-                    </a>
-                  </div>
                 </div>
               </div>
-            </div>
-            <% });} %>
+              <% }); } %> 
               <% if (typeof error !== 'undefined') { %>
                 <% if (typeof error.noFavorites !== 'undefined')  { %>
-            <div class="col-sm-12 p-3">
-              <div class="text-center">
-                <i class="fas fa-frown fa-2x"></i>
-                  <p><strong ><%= error.noFavorites %></strong></p>
-              </div>
-            </div>
-            <% }} %>
+                  <div class="col-sm-12 p-3">
+                    <div class="text-center">
+                      <i class="fas fa-frown fa-2x"></i>
+                        <p><strong ><%= error.noFavorites %></strong></p>
+                    </div>
+                  </div>
+              <% }} %>
           </div>
-
-
         </div>
         <!--Panel 2-->
         <div class="tab-pane fade in" id="panel105" role="tabpanel">
@@ -122,25 +95,51 @@
            <div class="row">
             <!-- row -->
             <!-- Movie tumbnail -->
-            <% if(typeof watchlist !== 'undefined' && watchlist.length > 0) { 
-                watchlist.forEach(movie => { %>
-            <div class="col-lg-3 col-md-6 col-sm-12 p-3">
-              <div class="card collection-card">
-                <div class="view zoom">
-                  <img class="img-fluid" src="<%= movie.large_cover_image || movie.image %>" alt="<%= movie.title %>" />
-                  <div class="stripe dark">
-                    <a href="/movies/watch/<%= movie.id %>" class="stretched-link">
-                      <strong>
-                        <p><%= (typeof movie.title !== 'undefined') ? movie.title : '' %></p>
-                      </strong>
-                      <p>(<%= (typeof movie.year !== 'undefined') ? movie.year : '' %>) <i class="fas fa-star"></i>
-                        <%= (typeof movie.rating !== 'undefined') ? movie.rating : '' %></p>
+            <% if (typeof watchlist !== 'undefined' && watchlist.length > 0) { %> 
+              <% watchlist.forEach(function(movie) { %>
+              <!-- News jumbotron -->
+              <div class="jumbotron tab-content-dark text-center m-3">
+                <!-- Grid row -->
+                <div class="row">
+                  <!-- Grid column -->
+                  <div class="col-md-4 offset-md-1 mx-3 my-3">
+                    <!-- Featured image -->
+                    <div class="view overlay d-flex justify-content-center">
+                      <img
+                        src="<%= watchlist && movie.poster %>"
+                        class="img-fluid"
+                        alt="<%=  watchlist && movie.title %>"
+                      />
+                      <a>
+                        <div class="mask rgba-white-slight"></div>
+                      </a>
+                    </div>
+                  </div>
+                  <!-- Grid column -->
+                  <div class="col-md-7 text-md-left ml-3 mt-3">
+                    <!-- Excerpt -->
+                    <a href="<%=  watchlist && movie.imdburl %>" target="_blank" class="cyan-text">
+                      <h3 class="h3 pb-1"><%= watchlist && movie.title %></h3>
                     </a>
+                    <h4 class="h4 mb-4 text-white">
+                      (<%= watchlist && movie.year %>) <i class="fas fa-star yellow-text"></i> <%=
+                      watchlist && movie.rating %>
+                    </h4>
+                    <p class="font-weight-normal text-white"> <%= watchlist && movie.plot %></p>
+                    <p class="font-weight-normal text-white">
+                      <p class="font-weight-bold lang" key="actors">Cast</p>
+                      <%= watchlist && movie.actors %>
+                    </p>
+                    <a
+                      class="btn btn-warning lang"
+                      href="<%=  watchlist && movie.imdburl %>"
+                      target="_blank" key='more-infos'
+                      >More Info</a
+                    >
                   </div>
                 </div>
               </div>
-            </div>
-            <% });} %>
+              <% }); } %> 
               <% if (typeof error !== 'undefined') { %>
                 <% if (typeof error.noWatchlist !== 'undefined')  { %>
             <div class="col-sm-12 p-3">
@@ -158,26 +157,52 @@
            <div class="row">
             <!-- row -->
             <!-- Movie tumbnail -->
-            <% if(typeof watched !== 'undefined' && watched.length > 0) { 
-                watched.forEach(movie => { %>
-            <div class="col-lg-3 col-md-6 col-sm-12 p-3">
-              <div class="card collection-card">
-                <div class="view zoom">
-                  <img class="img-fluid" src="<%= movie.large_cover_image || movie.image %>" alt="<%= movie.title %>" />
-                  <div class="stripe dark">
-                    <a href="/movies/watch/<%= movie.id %>" class="stretched-link">
-                      <strong>
-                        <p><%= (typeof movie.title !== 'undefined') ? movie.title : '' %></p>
-                      </strong>
-                      <p>(<%= (typeof movie.year !== 'undefined') ? movie.year : '' %>) <i class="fas fa-star"></i>
-                        <%= (typeof movie.rating !== 'undefined') ? movie.rating : '' %></p>
+            <% if (typeof watched !== 'undefined' && watched.length > 0) { %> 
+              <% watched.forEach(function(movie) { %>
+              <!-- News jumbotron -->
+              <div class="jumbotron tab-content-dark text-center m-3">
+                <!-- Grid row -->
+                <div class="row">
+                  <!-- Grid column -->
+                  <div class="col-md-4 offset-md-1 mx-3 my-3">
+                    <!-- Featured image -->
+                    <div class="view overlay d-flex justify-content-center">
+                      <img
+                        src="<%= watched && movie.poster %>"
+                        class="img-fluid"
+                        alt="<%=  watched && movie.title %>"
+                      />
+                      <a>
+                        <div class="mask rgba-white-slight"></div>
+                      </a>
+                    </div>
+                  </div>
+                  <!-- Grid column -->
+                  <div class="col-md-7 text-md-left ml-3 mt-3">
+                    <!-- Excerpt -->
+                    <a href="<%=  watched && movie.imdburl %>" target="_blank" class="cyan-text">
+                      <h3 class="h3 pb-1"><%= watched && movie.title %></h3>
                     </a>
+                    <h4 class="h4 mb-4 text-white">
+                      (<%= watched && movie.year %>) <i class="fas fa-star yellow-text"></i> <%=
+                      watched && movie.rating %>
+                    </h4>
+                    <p class="font-weight-normal text-white"> <%= watched && movie.plot %></p>
+                    <p class="font-weight-normal text-white">
+                      <p class="font-weight-bold lang" key="actors">Cast</p>
+                      <%= watched && movie.actors %>
+                    </p>
+                    <a
+                      class="btn btn-warning lang"
+                      href="<%=  watched && movie.imdburl %>"
+                      target="_blank" key='more-infos'
+                      >More Info</a
+                    >
                   </div>
                 </div>
               </div>
-            </div>
-            <% });} %>
-              <% if (typeof error !== 'undefined') { %>
+              <% }); } %>
+            <% if (typeof error !== 'undefined') { %>
                 <% if (typeof error.noWatched !== 'undefined')  { %>
             <div class="col-sm-12 p-3">
               <div class="text-center">

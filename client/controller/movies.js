@@ -38,7 +38,7 @@ const Movies = {
     //     }
     // },
 
-    //http://localhost:3000/captions/tt1156398?lang=fr
+    //http://134.209.183.92:3000/captions/tt1156398?lang=fr
     movieCaptions: async (id, lang) => {
         try {
             const captions = await axios.get(

@@ -42,7 +42,7 @@ const User = {
               if (created) {
                 const token = jwt.sign(
                   { _id: created._id.toString() },
-                  '${process.env.JWT_KEY}'
+                  'Hypertube'
                 );
                 created.jwt = token;
                 await created.save();
@@ -73,7 +73,7 @@ const User = {
   },
 
   userReset: async (data) => {
-    try{
+    try {
       const Body = Object.keys(data)
       const Allowed = ['password','token','confirm']
       //// check every element of body if it has the allowed array elements returns false if one element doest correspond
@@ -95,15 +95,12 @@ const User = {
         // User Not Found !
         throw new Error(Dictionary().USER_NOT_FOUND)
 
-      
       if(!user.verified)
         // Activate Account first
         throw new Error(Dictionary().ACTIVATE_ACCOUNT)
 
-
       user.password = data.password;
       await user.save();
-
       return true
     }
     catch(e){
@@ -182,38 +179,38 @@ const User = {
     }
   },
 
-  userAddPwd: async (data,id) => {
-    try{
-        const Body = Object.keys(data)
+  // userAddPwd: async (data,id) => {
+  //   try{
+  //       const Body = Object.keys(data)
 
-      const Allowed = ['new','confirm']
-      // //// check every element of body if it has the allowed array elements returns false if one element doest correspond
-      const isValidOperation = Body.every((element) => Allowed.includes(element))
+  //     const Allowed = ['new','confirm']
+  //     // //// check every element of body if it has the allowed array elements returns false if one element doest correspond
+  //     const isValidOperation = Body.every((element) => Allowed.includes(element))
 
-      if(!isValidOperation)
-           throw new Error(Dictionary().INVALID_OPERATION)
-      if(Body.length != Allowed.length)
-           throw new Error(Dictionary().ELMENTS_MISSING)
+  //     if(!isValidOperation)
+  //          throw new Error(Dictionary().INVALID_OPERATION)
+  //     if(Body.length != Allowed.length)
+  //          throw new Error(Dictionary().ELMENTS_MISSING)
 
-      await utilities.checkFormatPassword(data.new) && await utilities.checkFormatPassword(data.confirm)
+  //     await utilities.checkFormatPassword(data.new) && await utilities.checkFormatPassword(data.confirm)
 
-      if(data.new !== data.confirm)
-           throw new Error(Dictionary().PASS_NOT_MATCH)
-      // /// get user by id
-      let user = await userModel.findById(id)
-      if(!user) 
-         throw new Error(Dictionary().USER_NOT_FOUND)
-      else{      
-          user.password = data.new;
-          await user.save();
-          console.log("password changed succesfully")
-          return true
-      }
-    }
-    catch(e){
-      throw new Error(e.message)
-    }
-  },
+  //     if(data.new !== data.confirm)
+  //          throw new Error(Dictionary().PASS_NOT_MATCH)
+  //     // /// get user by id
+  //     let user = await userModel.findById(id)
+  //     if(!user) 
+  //        throw new Error(Dictionary().USER_NOT_FOUND)
+  //     else{      
+  //         user.password = data.new;
+  //         await user.save();
+  //         console.log("password changed succesfully")
+  //         return true
+  //     }
+  //   }
+  //   catch(e){
+  //     throw new Error(e.message)
+  //   }
+  // },
 
   userView: async (id) => {
     try{
@@ -252,11 +249,10 @@ const User = {
   },
 
   userConfirm: async (token) => {
-    try{
+    try {
       if(!token)
           // invalid Token
           throw new Error(Dictionary().NOT_VALID_TOKEN)
-
 
       const user = await userModel.findOne({token})
       if(!user) 
@@ -270,7 +266,6 @@ const User = {
       else 
         // Account Already Confirmed
         throw new Error(Dictionary().ACCOUNT_ACONFIRMED)
-
 
       await  mailHandler.sendConfirmed(user.email, user.name)
       return true

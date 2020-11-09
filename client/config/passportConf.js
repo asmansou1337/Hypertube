@@ -90,7 +90,7 @@ passport.use(new LocalStrategy({
       const validPass = await bcrypt.compare(password, user.password)
       if (!validPass) return done(null, false, req.flash('error','PASS_NOT_MATCH'));
       if(!user.verified) return done(null, false, req.flash('error','ACTIVATE_ACCOUNT'));
-      const token = jwt.sign({ _id: user._id.toString() }, '${process.env.JWT_KEY}');
+      const token = jwt.sign({ _id: user._id.toString() }, 'Hypertube');
       user.jwt = token;
       await user.save();
       console.log("A Local User Exists...", { jwt: token });
@@ -116,7 +116,7 @@ passport.use(
           { googleID: profile._json.sub},
           async (error, user) => {
             if (user) {
-              const token = jwt.sign({ _id: user._id.toString() }, '${process.env.JWT_KEY}');
+              const token = jwt.sign({ _id: user._id.toString() }, 'Hypertube');
               user.jwt = token;
               await user.save();
               console.log("A User With Google Strategy Already Exists...", { jwt: token });
@@ -137,11 +137,11 @@ passport.use(
             if (created) {
               const token = jwt.sign(
                 { _id: created._id.toString() },
-                '${process.env.JWT_KEY}'
+                'Hypertube'
               );
               created.jwt = token;
               await created.save();
-              done(null, user);
+              done(null, created);
               console.log("New User With Google Strategy Created Succesfully...", {
                 jwt: token,
               });
@@ -161,12 +161,13 @@ passport.use(new FortyTwoStrategy(
   keys.FortTwo,
     /// middleware callback function for passport
     async (accessToken, refreshToken, profile, done) => {
+      // console.log('profile id == ' + profile.id)
       try {
         await User.findOne(
           { fortytwoID: profile.id},
           async (error, user) => {
             if (user) {
-              const token = jwt.sign({ _id: user._id.toString() }, '${process.env.JWT_KEY}');
+              const token = jwt.sign({ _id: user._id.toString() }, 'Hypertube');
               user.jwt = token;
               await user.save();
               console.log("A User With FortyTwo Strategy Already Exists...", { jwt: token });
@@ -187,14 +188,14 @@ passport.use(new FortyTwoStrategy(
             if (created) {
               const token = jwt.sign(
                 { _id: created._id.toString() },
-                '${process.env.JWT_KEY}'
+                'Hypertube'
               );
               created.jwt = token;
               await created.save();
-              done(null, user);
               console.log("New User With FortyTwo Strategy Created Succesfully...", {
                 jwt: token,
               });
+              done(null, created);
             }
           }
         );

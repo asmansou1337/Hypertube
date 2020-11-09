@@ -177,7 +177,7 @@ moviesRouter.get('/myMovies', verifyAuth, lang, async (req,res) => {
         const favorites = await moviesController.movieInfoByIds(req.user.favorites)
         const watchlist = await moviesController.movieInfoByIds(req.user.watchlist)
         const watched = await moviesController.movieInfoByIds(req.user.watched)
-        console.log(req.user)
+        // console.log(favorites)
         return res.render('pages/myMoviesList', {favorites, watchlist, watched, error})
     }
     catch (e) {

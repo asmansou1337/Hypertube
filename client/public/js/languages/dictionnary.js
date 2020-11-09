@@ -90,6 +90,7 @@ var arrLang = {
         'name': 'Name',
         'statistics': 'Statistics',
         'myMovies': 'My Movies',
+        'more-infos' : 'More Info'
     },
     'fr': {
         'sign-up': "S'inscrire",
@@ -182,5 +183,6 @@ var arrLang = {
         'name': 'Nom',
         'statistics': 'Statistiques',
         'myMovies': 'Mes Films',
+        'more-infos' : 'Plus d\'informations',
     }
 };

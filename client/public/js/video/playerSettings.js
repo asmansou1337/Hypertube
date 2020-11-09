@@ -21,15 +21,15 @@ errorDisplay.off(myPlayer, 'error', errorDisplay.open);
      myPlayer.src(
      {
        type: "video/mp4",
-       src: `http://localhost:3000/movies/watch/${movieId}?hash=${hash}`,
+       src: `http://134.209.183.92:3000/movies/watch/${movieId}?hash=${hash}`,
      },
      {
        type: "video/ogg",
-       src: `http://localhost:3000/movies/watch/${movieId}?hash=${hash}`,
+       src: `http://134.209.183.92:3000/movies/watch/${movieId}?hash=${hash}`,
      },
      {
        type: "video/webm",
-       src: `http://localhost:3000/movies/watch/${movieId}?hash=${hash}`,
+       src: `http://134.209.183.92:3000/movies/watch/${movieId}?hash=${hash}`,
      }
    );
    $("#modalTorrents").modal("hide");

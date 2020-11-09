@@ -74,7 +74,7 @@ userRouter.post('/reset/:token', lang, async (req ,res) => {
 })
 
 // post Edit Profile
-userRouter.post('/me',verifyAuth, lang,async (req, res) => {
+userRouter.post('/me', verifyAuth, lang, async (req, res) => {
     try{
         const uid = req.user._id
         const result = await userController.userEdit(req.body, uid)
@@ -84,6 +84,7 @@ userRouter.post('/me',verifyAuth, lang,async (req, res) => {
         {
             result.profileImg = '/images/'+ result.profileImg
         }
+        req.user = result
         res.cookie('lang',result.language)
         res.render('pages/editProfile',{user : result,success : [Dictionary().US],errors : undefined})
     }
@@ -209,9 +210,9 @@ userRouter.post('/upload', verifyAuth, lang, upload, async (req, res) => {
 })
 
 
-userRouter.get('/view/:uid',verifyAuth,lang,async (req, res) => {
+userRouter.get('/view/:uid', verifyAuth, lang, async (req, res) => {
     try{
-    //http://localhost/users/view/5f6d1d57ee05cb00ca5e3572
+    //http://134.209.183.92/users/view/5f6d1d57ee05cb00ca5e3572
         let uid = req.params.uid
         if(ObjectId.isValid(uid))
         {
@@ -220,7 +221,7 @@ userRouter.get('/view/:uid',verifyAuth,lang,async (req, res) => {
             if(!checkUrl(result.profileImg)){
                 result.profileImg = '/images/'+ result.profileImg
             }
-            res.render('pages/viewUser',{user : result ,errors : undefined})
+            res.render('pages/viewUser',{user : result , errors : undefined})
         }
         else
             res.render('pages/error',{success : undefined , error : Dictionary().SWWUCBF})
