@@ -139,7 +139,7 @@ const Movies = {
               })
             if(!user)
               throw new Error(Dictionary().SWWPTA)
-              return {Message: Dictionary().SAW}
+            return {Message: Dictionary().SAW}
         }
         catch (e) {
             throw new Error(e.message)
@@ -156,6 +156,7 @@ const Movies = {
     movieInfoByIds : async (movies) => {
         const results = []
         for (let i = 0; i < movies.length; i++) {
+            // const movie = await Movie.movieDiscover(movies[i])
             const movie = await imdbClient.get({id: movies[i]})
             results.push(movie)
         }

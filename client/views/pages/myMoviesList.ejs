@@ -33,6 +33,57 @@
           <div class="row">
             <!-- row -->
             <!-- Movie tumbnail -->
+            <% if (favorites) { %> <% favorites.forEach(function(movie){ %>
+              <!-- News jumbotron -->
+              <div class="jumbotron stylish-color text-center p-4">
+                <!-- Grid row -->
+                <div class="row">
+                  <!-- Grid column -->
+                  <div class="col-md-4 offset-md-1 mx-3 my-3">
+                    <!-- Featured image -->
+                    <div class="view overlay d-flex justify-content-center">
+                      <img
+                        src="<%= favorites && movie.poster %>"
+                        class="img-fluid"
+                        alt="<%=  favorites && movie.title %>"
+                      />
+                      <a>
+                        <div class="mask rgba-white-slight"></div>
+                      </a>
+                    </div>
+                  </div>
+                  <!-- Grid column -->
+                  <!-- Grid column -->
+                  <div class="col-md-7 text-md-left ml-3 mt-3">
+                    <!-- Excerpt -->
+                    <a href="<%=  favorites && movie.imdburl %>" target="_blank" class="cyan-text">
+                      <h3 class="h3 pb-1"><%= favorites && movie.title %></h3>
+                    </a>
+                    <h4 class="h4 mb-4 text-white">
+                      (<%= favorites && movie.year %>) <i class="fas fa-star yellow-text"></i> <%=
+                      favorites && movie.rating %>
+                    </h4>
+                    <p class="font-weight-normal text-white"> <%= favorites && movie.plot %></p>
+                    <p class="font-weight-normal text-white">
+                      <a><strong>Actors: </strong></a
+                      ><%= favorites && movie.actors %>
+                    </p>
+                    <a
+                      class="btn btn-warning"
+                      href="<%=  favorites && movie.imdburl %>"
+                      target="_blank"
+                      >More Info</a
+                    >
+                  </div>
+                  <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+              </div>
+              <!-- News jumbotron -->
+              <% }); %> <% } %>
+
+
+
             <% if(typeof favorites !== 'undefined' && favorites.length > 0) { 
                 favorites.forEach(movie => { %>
             <div class="col-lg-3 col-md-6 col-sm-12 p-3">

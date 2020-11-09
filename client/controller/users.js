@@ -42,7 +42,7 @@ const User = {
               if (created) {
                 const token = jwt.sign(
                   { _id: created._id.toString() },
-                  "Hypertube"
+                  '${process.env.JWT_KEY}'
                 );
                 created.jwt = token;
                 await created.save();

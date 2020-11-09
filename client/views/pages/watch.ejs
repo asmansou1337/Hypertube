@@ -12,7 +12,7 @@
         <div class="card card-image" style="background-image: url('<%= movie.large_cover_image %>');">
           <div id="<%= movie.id %>" class="card-body rgba-black-strong videoContainer">
             <div class="container flex-center text-center">
-              <!-- <div id="moviePlayer" class="embed-responsive embed-responsive-21by9">
+              <div id="moviePlayer" class="embed-responsive embed-responsive-21by9">
                 <video 
                 id="my-video"
                 class="video-js"
@@ -25,7 +25,7 @@
                 <source src="http://localhost:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/mp4" />
                 <source src="http://localhost:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/webm" />
               </video>
-              </div> -->
+              </div>
               </div>
           </div>
         </div>
@@ -171,9 +171,9 @@
          $('[data-toggle="tooltip"]').tooltip()
        })
    </script>
-   <!-- <script src="https://vjs.zencdn.net/7.7.6/video.js"></script>
+   <script src="https://vjs.zencdn.net/7.7.6/video.js"></script>
    <script src="/js/video/player/lang/fr.js"></script>
-   <script src="/js/video/playerSettings.js"></script> -->
+   <script src="/js/video/playerSettings.js"></script>
     <script>
 
       async function addToFavorites(id){

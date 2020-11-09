@@ -174,10 +174,11 @@ moviesRouter.get('/myMovies', verifyAuth, lang, async (req,res) => {
             error.noWatched = noWatched
         if(!req.user.watchlist || req.user.watchlist.length == 0)
             error.noWatchlist = noWatchlist
-        // const favorites = await moviesController.movieInfoByIds(req.user.favorites)
-        // const watchlist = await moviesController.movieInfoByIds(req.user.watchlist)
-        // const watched = await moviesController.movieInfoByIds(req.user.watched)
-        return res.render('pages/myMoviesList', {favorites: req.user.favorites, watchlist: req.user.watchlist, watched: req.user.watched, error})
+        const favorites = await moviesController.movieInfoByIds(req.user.favorites)
+        const watchlist = await moviesController.movieInfoByIds(req.user.watchlist)
+        const watched = await moviesController.movieInfoByIds(req.user.watched)
+        console.log(req.user)
+        return res.render('pages/myMoviesList', {favorites, watchlist, watched, error})
     }
     catch (e) {
         console.log(e.message)

@@ -9,7 +9,7 @@
             <div class="row ">
                 <div class="logo  mt-1 ml-4 ">
                     <a href="/">
-                        <img class=" img-fluid" src="https://fontmeme.com/permalink/200407/8813e43dda033418cb115fcdf3d3cb95.png" alt="netflix-font">
+                        <img class="img-fluid" src="/images/logo.png" alt="hypertube">
                     </a>
               
                 </div>
@@ -70,33 +70,24 @@
                 <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab lang"
                     key="sign-in">Sign In</label>
                 <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab lang"
-                    key="sign-up">Sign
-                    Up</label>
+                    key="sign-up">Sign Up</label>
                 <div class="login-form">
                     <div class="sign-in-htm">
                         <!-- Form -->
                         <form class="text-center" style="color: #757575;" action="/auth/login" method="POST">
-
-                            <!-- Email -->
+                            <!-- Username -->
                             <div class="md-form">
-                                <input type="text" id="materialLoginFormUsernameSignIn" class="form-control"  name="username" >
+                                <input type="text" class="form-control"  name="username" >
                                 <label for="materialLoginFormUsername" class="lang" key="username">Username</label>
                             </div>
                             <br>
                             <!-- Password -->
                             <div class="md-form">
-                                <input type="password" id="materialLoginFormPasswordSignIn" class="form-control"  name="password" >
+                                <input type="password" class="form-control"  name="password" >
                                 <label for="materialLoginFormPassword" class="lang" key="password">Password</label>
                             </div>
 
                             <div class="d-flex justify-content-around">
-                                <div>
-                                    <!-- Remember me -->
-                                    <div class="form-check">
-                                        <!-- <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
-                                            <label class="form-check-label" for="materialLoginFormRemember">Remember me</label> -->
-                                    </div>
-                                </div>
                                 <div>
                                     <!-- Forgot password -->
                                     <a href="/users/forgot" class="lang" key="forgot-password">Forgot password?</a>
@@ -107,7 +98,6 @@
                             <button class="btn text-light mdb-color darken-3 btn-rounded lang" key="sign-in">
                                 Sign in
                             </button>
-                            <!-- <button class="btn btn-outline-info btn-rounded btn-block  waves-effect z-depth-0" type="submit">Sign in</button> -->
 
                             <!-- Social login -->
                             <p class="lang" key="or-sign-in-with">or sign in with:</p>
@@ -122,7 +112,6 @@
                     </div>
                     <div class="sign-up-htm">
                         <!-- Form -->
-                        <!-- <form class="text-center" style="color: #757575;" action="/users/register" method="POST"> -->
                             <!-- First-Name -->
                             <div class="md-form mt-0">
                                 <input type="text"  name="firstname"
@@ -139,7 +128,7 @@
                             </div>
                             <!-- Username -->
                             <div class="md-form mt-0">
-                                <input type="text" id="materialRegisterFormEmailSignUp" name="username"
+                                <input type="text" name="username"
                                     class="form-control">
                                 <label for="materialRegisterFormUsername" class="lang"
                                     key="username">Username</label>
@@ -147,14 +136,14 @@
 
                             <!-- E-mail -->
                             <div class="md-form mt-0">
-                                <input type="email" id="materialRegisterFormEmail" name="email"
+                                <input type="email"  name="email"
                                     class="form-control">
                                 <label for="materialRegisterFormEmail" class="lang" key="email">E-mail</label>
                             </div>
 
                             <!-- Password -->
                             <div class="md-form">
-                                <input type="password" id="materialRegisterFormPasswordSignUp" name="password"
+                                <input type="password" name="password"
                                     class="form-control"
                                     aria-describedby="materialRegisterFormPasswordHelpBlock">
                                 <label for="materialRegisterFormPassword" class="lang"
@@ -169,7 +158,7 @@
                             <!-- Confirm Password -->
                             <div class="md-form">
                                 <input type="password" name="confirm"
-                                    id="materialRegisterFormPasswordSignUpConfirm" class="form-control"
+                                    class="form-control"
                                     aria-describedby="materialRegisterFormPasswordHelpBlock">
                                 <label for="materialRegisterFormPassword" class="lang"
                                     key="confirm-password">Confirm
@@ -183,8 +172,6 @@
 
 
                             <!-- Sign up button -->
-                            <!-- <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0"
-                                type="submit">Sign in</button> -->
                             <button class="btn text-light mdb-color darken-3 btn-rounded lang" key="sign-up" onclick="handleRegister()">
                                 Sign up
                             </button>
@@ -217,8 +204,8 @@
         function handleRegister(){
             const firstname = document.getElementsByName('firstname') && document.getElementsByName('firstname')[0].value
             const lastname =document.getElementsByName('lastname') && document.getElementsByName('lastname')[0].value
-            const username =document.getElementsByName('username') && document.getElementsByName('username')[0].value
-            const email =document.getElementsByName('email') && document.getElementsByName('email')[1].value
+            const username =document.getElementsByName('username') && document.getElementsByName('username')[1].value
+            const email = document.getElementsByName('email') && document.getElementsByName('email')[0].value
             const password =document.getElementsByName('password') && document.getElementsByName('password')[1].value
             const confirm =document.getElementsByName('confirm') && document.getElementsByName('confirm')[0].value
             const registerData = {

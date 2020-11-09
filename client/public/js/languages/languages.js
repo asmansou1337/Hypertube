@@ -63,7 +63,6 @@ $(function () {
         if (!lang || (lang !== 'en' && lang !== 'fr')) 
             lang = 'en'
         document.cookie = "lang=" + lang + "; path=/";
-
         $('.lang').each(function (index, element) {
             $(this).text(arrLang[lang][$(this).attr('key')]);
         });
