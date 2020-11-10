@@ -11,9 +11,9 @@ const Maintenance = {
       const CURRENT_DAY = new Date();
       if (movies.length > 0) {
         for (let i = 0; i < movies.length; i++) {
-          duration = timediff(movies[i].WatchedOn, CURRENT_DAY, "YDHms");
+          var duration = timediff(movies[i].WatchedOn, CURRENT_DAY, "YDHms");
           if (duration.days > 30)
-            DIR_EXISTS = await fs.existsSync(`./movies/${movies[i].imdbCode}`);
+            var DIR_EXISTS = await fs.existsSync(`./movies/${movies[i].imdbCode}`);
           if (DIR_EXISTS) {
             rimraf(`./movies/${movies[i].File}`, async (error) => {
               if (!error) {
