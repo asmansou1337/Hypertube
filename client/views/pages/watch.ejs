@@ -22,8 +22,8 @@
                 poster="<%= movie.large_screenshot_image1 %>"
                 data-setup="{}"
                 >
-                <source src="http://134.209.183.92:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/mp4" />
-                <source src="http://134.209.183.92:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/webm" />
+                <source src="http://localhost:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/mp4" />
+                <source src="http://localhost:3000/movies/watch/<%= movie.id %>?hash=<%= source %>" type="video/webm" />
               </video>
               </div>
               </div>
@@ -181,7 +181,10 @@
           return
         await axios.post('/movies/'+ id +'/favorites').then((res) => {
           if(res.data && res.data.Message){
-            document.getElementsByName(id)[0] && document.getElementsByName(id)[0].classList.replace('btnColorGrey', 'btnColorTeal');
+            if (res.data.add == 1)
+              document.getElementsByName(id)[0] && document.getElementsByName(id)[0].classList.replace('btnColorGrey', 'btnColorTeal');
+            else
+              document.getElementsByName(id)[0] && document.getElementsByName(id)[0].classList.replace('btnColorTeal', 'btnColorGrey');
             return toastr.success(res.data.Message);
           }
           else
@@ -196,7 +199,10 @@
           return
         await axios.post('/movies/'+ id +'/watchlist').then((res) => {
           if(res.data && res.data.Message){
-            document.getElementsByName(id)[1] && document.getElementsByName(id)[1].classList.replace('btnColorGrey', 'btnColorTeal');
+            if (res.data.add == 1)
+              document.getElementsByName(id)[1] && document.getElementsByName(id)[1].classList.replace('btnColorGrey', 'btnColorTeal');
+            else
+              document.getElementsByName(id)[1] && document.getElementsByName(id)[1].classList.replace('btnColorTeal', 'btnColorGrey');
             return toastr.success(res.data.Message);
           }
           else
@@ -255,7 +261,7 @@
           comment
         }
         
-        axios.post('http://134.209.183.92/comments/add?imdb='+id+'', data)
+        axios.post('http://localhost/comments/add?imdb='+id+'', data)
             .then((res) => {
                 if(res && res.data && res.data.error)
                     toastr.error(res.data.error);

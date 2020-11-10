@@ -3,7 +3,7 @@ const captionsRouter = new express.Router();
 const captionsController = require('../controller/captions')
 const utilities = require('../libraries/utilities')
 
-//http://134.209.183.92:3000/v1/captions/tt1156398?lang=fr
+//http://localhost:3000/v1/captions/tt1156398?lang=fr
 captionsRouter.get('/:id', async (req ,res) => {
     try{
         const captions = await captionsController.findCaptions(req.params.id)

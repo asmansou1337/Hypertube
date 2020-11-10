@@ -216,7 +216,7 @@
             password ,
             confirm ,
             }
-            axios.post('http://134.209.183.92/users/register', registerData)
+            axios.post('http://localhost/users/register', registerData)
             .then((res) => {
                 if(res && res.data && res.data.error)
                     toastr.error(res.data.error);

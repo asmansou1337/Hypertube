@@ -212,7 +212,7 @@ userRouter.post('/upload', verifyAuth, lang, upload, async (req, res) => {
 
 userRouter.get('/view/:uid', verifyAuth, lang, async (req, res) => {
     try{
-    //http://134.209.183.92/users/view/5f6d1d57ee05cb00ca5e3572
+    //http://localhost/users/view/5f6d1d57ee05cb00ca5e3572
         let uid = req.params.uid
         if(ObjectId.isValid(uid))
         {
