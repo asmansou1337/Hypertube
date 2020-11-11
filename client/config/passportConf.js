@@ -1,16 +1,14 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20");
 const FortyTwoStrategy = require('passport-42').Strategy
-const FacebookStrategy = require('passport-facebook').Strategy
 const LocalStrategy = require('passport-local').Strategy
-const GitHubStrategy = require('passport-github').Strategy;
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs')
 const utilities = require('../libraries/utilities')
 const keys = require("./keys");
 const User = require("../model/user");
 
-
+// Passport generates a token and send it to the browser
 passport.serializeUser((user, done) => {
   if(user.id)
     done(null, user.id);
@@ -18,64 +16,19 @@ passport.serializeUser((user, done) => {
     done(null, false)
 });
 
+// take the identifying token and turn it into a user
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
     if (user) done(null, user);
     else 
-    done(null, false)
+      done(null, false)
   } catch (e) {
     console.log(e.message);
   }
 });
 
-//Github Strategy
-// passport.use(new GitHubStrategy(
-//   keys.Github,
-//   async (accessToken, refreshToken, profile, done) => {
-//     try {
-//       await User.findOne(
-//         { githubID: profile._json.id},
-//         async (error, user) => {
-//           if (user) {
-//             const token = jwt.sign({ _id: user._id.toString() }, "Hypertube");
-//             user.jwt = token;
-//             await user.save();
-//             console.log("A User With Github Strategy Already Exists...", { jwt: token });
-//             return done(null, user);
-//           }
-//           const username = await utilities.genUserName()
-//           const GeneratedProfilePic = await utilities.genProfilePic(username)
-//           const newUser = new User({
-//             username,
-//             firstname: profile._json.name || undefined,
-//             githubID: profile._json.id,
-//             email: profile._json.email || undefined,
-//             profileImg: profile._json.avatar_url || GeneratedProfilePic,
-//             verified: true
-//           });
-
-//           const created = await newUser.save();
-//           if (created) {
-//             const token = jwt.sign(
-//               { _id: created._id.toString() },
-//               "Hypertube"
-//             );
-//             created.jwt = token;
-//             await created.save();
-//             done(null, user);
-//             console.log("New User With Github Strategy Created Succesfully...", {
-//               jwt: token,
-//             });
-//           }
-//         }
-//       );
-//     } catch (e) {
-//       console.log(e.message);
-//     }
-//   }
-// ));
-
+// Local strategy
 passport.use(new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
@@ -112,9 +65,7 @@ passport.use(
     /// middleware callback function for passport
     async (accessToken, refreshToken, profile, done) => {
       try {
-       await User.findOne(
-          { googleID: profile._json.sub},
-          async (error, user) => {
+       await User.findOne({ googleID: profile._json.sub}, async (error, user) => {
             if (user) {
               const token = jwt.sign({ _id: user._id.toString() }, 'Hypertube');
               user.jwt = token;
@@ -124,13 +75,14 @@ passport.use(
             }
             else {
               const username = await utilities.genUserName()
+              const profileImg = await utilities.genProfilePic(username)
               const newUser = new User({
               username,
               firstname: profile._json.given_name,
               lastname: profile._json.family_name,
               googleID: profile._json.sub,
               email: profile._json.email,
-              profileImg: profile._json.picture,
+              profileImg,
               verified: true,
             });
             const created = await newUser.save();
@@ -163,9 +115,7 @@ passport.use(new FortyTwoStrategy(
     async (accessToken, refreshToken, profile, done) => {
       // console.log('profile id == ' + profile.id)
       try {
-        await User.findOne(
-          { fortytwoID: profile.id},
-          async (error, user) => {
+        await User.findOne({ fortytwoID: profile.id}, async (error, user) => {
             if (user) {
               const token = jwt.sign({ _id: user._id.toString() }, 'Hypertube');
               user.jwt = token;
@@ -205,52 +155,3 @@ passport.use(new FortyTwoStrategy(
     }
   )
 );
-
-/// Facebook Strategy
-// passport.use(new FacebookStrategy(
-//   // facebook key
-//   keys.Facebook,
-//   async (accessToken, refreshToken, profile, done) => {
-//     try {
-//       await User.findOne(
-//         { facebookID: profile.id},
-//         async (error, user) => {
-//           if (user) {
-//             const token = jwt.sign({ _id: user._id.toString() }, "Hypertube");
-//             user.jwt = token;
-//             await user.save();
-//             console.log("A User With Facebook Strategy Already Exists...", { jwt: token });
-//             return done(null, user);
-//           }
-//           const username = await utilities.genUserName()
-//           const GeneratedProfilePic = await utilities.genProfilePic(username)
-//           const newUser = new User({
-//             lastname: profile.name.familyName || undefined,
-//             firstname: profile.name.givenName || profile.displayName ||undefined,
-//             username,
-//             facebookID: profile._json.id,
-//             profileImg: profile.photos[0].value || GeneratedProfilePic,
-//             verified: true
-//           });
-//           const created = await newUser.save();
-//           if (created) {
-//             const token = jwt.sign(
-//               { _id: created._id.toString() },
-//               "Hypertube"
-//             );
-//             created.jwt = token;
-//             await created.save();
-//             done(null, user);
-//             console.log("New User With Facebook Strategy Created Succesfully...", {
-//               jwt: token,
-//             });
-//           }
-//         }
-//       );
-//     } catch (e) {
-//       console.log(e.message);
-//     }
-//   }
-// )
-// );
-

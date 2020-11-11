@@ -15,7 +15,7 @@ const Maintenance = {
           if (duration.days > 30)
             var DIR_EXISTS = await fs.existsSync(`./movies/${movies[i].imdbCode}`);
           if (DIR_EXISTS) {
-            rimraf(`./movies/${movies[i].File}`, async (error) => {
+            rimraf(`${movies[i].File}`, async (error) => {
               if (!error) {
                 const deleted = await movieModel.deleteOne({
                   imdbCode: movies[i].imdbCode,

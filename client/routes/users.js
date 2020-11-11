@@ -1,6 +1,6 @@
 const express = require("express");
 const userRouter = new express.Router();
-var contextService = require('request-context')
+// var contextService = require('request-context')
 const userController = require('../controller/users')
 const verifyAuth = require('../middlewares/auth')
 const upload = require('../middlewares/upload')
@@ -84,7 +84,7 @@ userRouter.post('/me', verifyAuth, lang, async (req, res) => {
         {
             result.profileImg = '/images/'+ result.profileImg
         }
-        req.user = result
+        // req.user = result
         res.cookie('lang',result.language)
         res.render('pages/editProfile',{user : result,success : [Dictionary().US],errors : undefined})
     }
@@ -126,39 +126,6 @@ userRouter.get('/me',verifyAuth, async (req, res) => {
 })
 
 // change password
-
-// userRouter.get('/changePassword',verifyAuth, async (req, res) => {
-//     try{
-//         const user = req.user
-//         let msg = req.flash()
-//         // should render page to add password if user has not set it yet 
-//         if(user.password)
-//             res.render('pages/changePassword')
-//         else
-//             res.redirect('/users/addPassword')
-//     }
-//     catch (e) {
-//         // should render errors with user
-//         console.log(e.message)
-//     }
-// })
-
-// userRouter.get('/addPassword',verifyAuth, async (req, res) => {
-//     try{
-//         const user = req.user
-//         let msg = req.flash()
-//         // should render page to add password if user has not set it yet 
-//         if(user.password)
-//             res.redirect('/users/changePassword')
-//         else 
-//             res.render('pages/addPassword')
-//     }
-//     catch (e) {
-//         // should render errors with user
-//         console.log(e.message)
-//     }
-// })
-
 userRouter.post('/change',verifyAuth, lang, async (req, res) => {
     try{
         const uid = req.user._id
@@ -176,22 +143,6 @@ userRouter.post('/change',verifyAuth, lang, async (req, res) => {
         return res.redirect('/users/me')
     }
 })
-
-// userRouter.post('/addPassword',lang, async (req, res) => {
-//     try{
-//         const uid = req.user._id
-//         let result  = null
-//         if(!req.user.password)
-//              result = await userController.userAddPwd(req.body,uid)
-//         // should render page with success message
-//         res.render('pages/addPassword',{success : [Dictionary().US],errors : undefined})
-//     }
-//     catch (e) {
-//         // should render errors with errors message
-//         console.log(e.message)
-//         res.render('pages/addPassword',{success : undefined , errors : [e.message]})
-//     }
-// })
 
 userRouter.post('/upload', verifyAuth, lang, upload, async (req, res) => {
     try{

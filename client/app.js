@@ -14,12 +14,12 @@ const cookieSession = require('cookie-session')
 const passport = require('passport')
 const passportConf = require("./config/passportConf");
 const flash = require('connect-flash');
-const contextService = require('request-context');
+// const contextService = require('request-context');
 const setLanguage = require('./middlewares/setLanguage')
 
 
 // wrap requests in the 'request' namespace (can be any string)
-app.use(contextService.middleware('user'));
+// app.use(contextService.middleware('user'));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.use(express.json())

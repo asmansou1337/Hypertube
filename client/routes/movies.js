@@ -186,43 +186,5 @@ moviesRouter.get('/myMovies', verifyAuth, lang, async (req,res) => {
     }
 })
 
-// A middlware to verify if user is connected should be added
-// moviesRouter.get('/watched', async (req,res) => {
-//     const title = req.user && req.user.language === 'fr' ? 'Historique des films' : 'Watched Movies'
-//     const Wrong = req.user && req.user.language === 'fr' ? 'Quelque chose a mal tourné ...' : 'Something Went Wrong...'
-//     const none = req.user && req.user.language === 'fr' ? 'Pas encore d\'historique, regardez des films!' : 'No watch history yet, watch some movies !'
-//     try {
-//         if(!req.user)
-//             return res.render('pages/watchList', {title, error: "No User", movies: undefined})
-//         if(!req.user.watched || req.user.watched.length == 0)
-//             return res.render('pages/watchList', {title, error: none, movies: undefined})
-//         const movies = await moviesController.movieInfoByIds(req.user.watched)
-//         return res.render('pages/watchList', {title,error: undefined, movies})
-//     }
-//     catch (e) {
-//         console.log(e.message)
-//         return res.render('pages/watchList', {title, error: Wrong, movies: undefined})
-//     }
-// })
-// moviesRouter.get('/watchlist', async (req,res) => {
-//     const title = req.user && req.user.language === 'fr' ? 'List des Films' : 'Watch List'
-//     const Wrong = req.user && req.user.language === 'fr' ? 'Quelque chose a mal tourné ...' : 'Something Went Wrong...'
-//     const none = req.user && req.user.language === 'fr' ? 'Pas encore de liste, ajoutez quelques films!' : 'No watchlist yet, add some movies !'
-//     try {
-//         /// the imdb api is limited by 1000 requests a day
-//         // const TEST_USER_FAVS = ['tt0090190', 'tt0803093']
-//         // const results = await moviesController.movieInfoByIds(TEST_USER_FAVS)
-//         if(!req.user)
-//             return res.render('pages/watchList', {title, error: "No User", movies: undefined})
-//         if(!req.user.watchlist || req.user.watchlist.length == 0)
-//             return res.render('pages/watchList', {title, error: none, movies: undefined})
-//         const movies = await moviesController.movieInfoByIds(req.user.watchlist)
-//         return res.render('pages/watchList', {title,error: undefined, movies})
-//     }
-//     catch (e) {
-//         console.log(e.message)
-//         return res.render('pages/watchList', {title, error: Wrong, movies: undefined})
-//     }
-// })
 
 module.exports = moviesRouter

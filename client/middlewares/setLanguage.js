@@ -1,7 +1,6 @@
 
 /**
-* Takes Lang value from cookie and sets it to contextService 
-example: console.log(contextService.get('user:locale')) => { lang: en }
+* Takes Lang value from cookie and sets it to a environment variable
 */
 const setLanguage = async (req, res, next) => {
     let cookies = {}
@@ -12,7 +11,6 @@ const setLanguage = async (req, res, next) => {
             cookies[parts.shift().trim()] = decodeURI(parts.join('='));
     });
 
-    // (cookies.lang && cookies.lang === 'fr') ? httpContext.set('lang', 'fr') : httpContext.set('lang', 'en')
     process.env['lang'] = (cookies.lang && cookies.lang === 'fr') ? 'fr' :  'en';
     next();
 }

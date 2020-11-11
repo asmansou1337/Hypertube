@@ -21,7 +21,7 @@ function displayProfile(e) {
 
 
 // function for  validate file extension
-var validExt = ".png, .jpeg,.jpg";
+var validExt = ".jpeg, .jpg";
 function fileExtValidate(fdata) {
     var filePath = fdata;
     var getFileExt = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase();
@@ -58,6 +58,7 @@ setTimeout(function(){
         $('#result').remove();
      }
     }, 5000)
-    $(document).ready(function() {
+
+$(document).ready(function() {
         $('.mdb-select').materialSelect();
         });

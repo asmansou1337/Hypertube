@@ -35,7 +35,6 @@ const userSchema = new Schema({
     firstname:{
         type: String,
         trim: true,
-        // required: true,
         lowercase: true,
         validate(value) {
             if (!validator.isAlpha(value, ['fr-FR']) || value > 42 || value < 2) {
@@ -47,7 +46,6 @@ const userSchema = new Schema({
     lastname:{
         type: String,
         trim: true,
-        // required: true,
         lowercase: true,
         validate(value) {
             if (!validator.isAlpha(value, ['fr-FR']) || value > 42 || value < 2) {
@@ -59,7 +57,6 @@ const userSchema = new Schema({
     email:{
         type: String,
         trim: true,
-        // required: true,
         lowercase: true,
         validate(value) {
             if (!validator.isEmail(value)) {

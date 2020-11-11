@@ -11,18 +11,6 @@ module.exports = {
         clientSecret: '14edb0e02574b06bcbdba5d51732fd6f4f9957d17ce31480a5ba98545c889aa5',
         callbackURL: "/auth/fortytwo/redirect"
     },
-    Facebook : {
-        clientID: '1590464764441073',
-        clientSecret: '94e3a6589e403bf8b9fcccca8300bca3',
-        callbackURL: "/auth/facebook/redirect",
-        profileFields: ['id', 'displayName', 'emails', 'picture.type(large)']
-        
-    },
-    Github: {  
-        clientID: 'fdd64d67895298085b36',
-        clientSecret: 'ec296e8542d4890b50767f0d4e9124dc89c27902',
-        callbackURL: "/auth/github/redirect"
-    },
     cookieKey: 'Hypertube',
     mailKeys: {
         host: 'smtp.gmail.com',

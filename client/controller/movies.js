@@ -26,18 +26,6 @@ const Movies = {
         }
     },
 
-    // moviePlay: async (id, hash) => {
-    //     try {
-    //         return await axios.get(
-    //             `${api}/movies/watch/${id}?hash=${hash}`,
-    //             );
-    //         // return play;
-    //     } catch (e) {
-    //         console.log(e.message)
-    //         throw new Error(Dictionary().SWWPTA)
-    //     }
-    // },
-
     //http://localhost:3000/captions/tt1156398?lang=fr
     movieCaptions: async (id, lang) => {
         try {

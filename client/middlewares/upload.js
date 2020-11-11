@@ -14,11 +14,11 @@ const upload = multer({
       fileSize: 5000000
     },
     fileFilter(req, file, cb) {
-      if (!file.originalname.match(/\.(jpeg|jpg|png)$/)){
+      if (!file.originalname.match(/\.(jpeg|jpg)$/)){
         req.fileValidationError = Dictionary().FILE_EXT_ERROR
         return cb(new Error(Dictionary().FILE_EXT_ERROR));
       }
-      if (!file.mimetype === "image/jpeg" || !file.mimetype === "image/jpg" || !file.mimetype === "image/png"){
+      if (!file.mimetype === "image/jpeg" || !file.mimetype === "image/jpg"){
         req.fileValidationError = Dictionary().FILE_ERROR 
         return cb(new Error(Dictionary().FILE_ERROR ));
       }
@@ -33,19 +33,15 @@ const uploadFile = async (req, res, next)=>{
     upload(req, res, function(err) {
     if (req.fileValidationError) {
         req.fileError = req.fileValidationError
-        // return res.redirect('/editProfile?error=' + req.fileValidationError)
     }
     else if (!req.file) {
         req.fileError = Dictionary().SELECT_PICTURE
-        // return res.redirect('/editProfile?error=select image')
     }
     else if (err instanceof multer.MulterError) {
         req.fileError = err
-        // return res.redirect('/editProfile?error=' + err)
     }
     else if (err) {
         req.fileError = err
-        // return res.redirect('/editProfile?error=' + err)
     }
     next()
 })
