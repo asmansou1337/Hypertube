@@ -43,38 +43,43 @@ const YifySubtitleScraper = async (imdb) => {
 
 const DownloadSubtitles = async (link, fullPath, lang, imdb) => {
   console.log(`downloading ${lang} subtitle...`);
-  got
-    .stream(link)
-    .pipe(unzipper())
-    .pipe(
-      streamz(
-        async (entry) => {
-          console.log(chalk.yellow(`streaming to save to file...`));
-          const parsedPath = path.parse(entry.path);
-          const filesExist = await fs.existsSync(`${fullPath}/${lang}`);
-          console.log(chalk.yellow(`fileExist? => ${filesExist}...`));
-          if (!filesExist) await fs.mkdirSync(`${fullPath}/${lang}`,{ recursive: true });
-          console.log(
-            chalk.yellow(`${parsedPath.name}.${parsedPath.ext} Saving as ${fullPath}/${lang}/${imdb}.srt...`)
-          );
-          return parsedPath.ext == ".srt"
-            ? entry
-                .pipe(srt2vtt())
-                .pipe(fs.createWriteStream(`${fullPath}/${lang}/${imdb}.vtt`))
-                .on("error", (e) => {
-                  throw new Error(e.message);
-                })
-            : entry
-                .pipe(fs.createWriteStream(`${fullPath}/${lang}/${imdb}.srt`))
-                .on("error", (e) => {
-                  throw new Error(e.message);
-                });
-        },
-        {
-          catch: (e) => console.log(chalk.red(`Streamz Error: ${e.message}`)),
-        }
-      )
-    );
+
+  const download = got.stream(link)
+  download.on("error", (error) => {
+    console.error(`Download failed: ${error.message}`);
+  });
+
+  download
+  .pipe(unzipper())
+  .pipe(
+    streamz(
+      async (entry) => {
+        console.log(chalk.yellow(`streaming to save to file...`));
+        const parsedPath = path.parse(entry.path);
+        const filesExist = await fs.existsSync(`${fullPath}/${lang}`);
+        console.log(chalk.yellow(`fileExist? => ${filesExist}...`));
+        if (!filesExist) await fs.mkdirSync(`${fullPath}/${lang}`,{ recursive: true });
+        console.log(
+          chalk.yellow(`${parsedPath.name}.${parsedPath.ext} Saving as ${fullPath}/${lang}/${imdb}.srt...`)
+        );
+        return parsedPath.ext == ".srt"
+          ? entry
+              .pipe(srt2vtt())
+              .pipe(fs.createWriteStream(`${fullPath}/${lang}/${imdb}.vtt`))
+              .on("error", (e) => {
+                throw new Error(e.message);
+              })
+          : entry
+              .pipe(fs.createWriteStream(`${fullPath}/${lang}/${imdb}.vtt`))
+              .on("error", (e) => {
+                throw new Error(e.message);
+              });
+      },
+      {
+        catch: (e) => console.log(chalk.red(`Streamz Error: ${e.message}`)),
+      }
+    )
+  )
 };
 
 const getSubtitles = async (imdb, fullPath) => {
