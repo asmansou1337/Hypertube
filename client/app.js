@@ -1,4 +1,3 @@
-// require('dotenv').config({path: __dirname + '/.env'})
 const express = require("express");
 const app = express();
 const Auth = require("./routes/auth");
@@ -14,12 +13,9 @@ const cookieSession = require('cookie-session')
 const passport = require('passport')
 const passportConf = require("./config/passportConf");
 const flash = require('connect-flash');
-// const contextService = require('request-context');
 const setLanguage = require('./middlewares/setLanguage')
 
 
-// wrap requests in the 'request' namespace (can be any string)
-// app.use(contextService.middleware('user'));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.use(express.json())
