@@ -2,6 +2,10 @@
 - A web application that allows a registred user to research and watch movies.
 - This project is part of the 1337 Khouribga Curriculum.
 
+- **Installation**
+  - this project run using docker
+  - Follow this [instructions](how-to-install.md) to launch the project
+
 ### Project details:
  - **User part :**
   - Registration page:
@@ -44,6 +48,7 @@
  ![Alt text](screenshots/subtitles.png?raw=true "Movie Subtitle")
  
  - The user can see his favorites/watchlist movies
+ 
  ![Alt text](screenshots/mymovies.png?raw=true "Movies")
  ![Alt text](screenshots/watched.png?raw=true "Movies")
  
