@@ -11,11 +11,12 @@ const Maintenance = {
       const CURRENT_DAY = new Date();
       if (movies.length > 0) {
         for (let i = 0; i < movies.length; i++) {
+          var DIR_EXISTS = undefined;
           var duration = timediff(movies[i].WatchedOn, CURRENT_DAY, "YDHms");
-          if (duration.days > 30)
-            var DIR_EXISTS = await fs.existsSync(`./movies/${movies[i].imdbCode}`);
+          if (duration.days > 30 || duration.years > 0)
+            DIR_EXISTS = await fs.existsSync(`./movies/${movies[i].imdbCode}`);
           if (DIR_EXISTS) {
-            rimraf(`${movies[i].File}`, async (error) => {
+            rimraf(`./movies/${movies[i].imdbCode}`, async (error) => {
               if (!error) {
                 const deleted = await movieModel.deleteOne({
                   imdbCode: movies[i].imdbCode,
