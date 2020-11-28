@@ -1,12 +1,12 @@
 # Hypertube Project
-A web application that allows a registred user to research and watch movies.
-This project is part of the 1337 Khouribga Curriculum.
+- A web application that allows a registred user to research and watch movies.
+- This project is part of the 1337 Khouribga Curriculum.
 
 ### Project details:
  - **User part :**
- - Registration page:
-    - at least an email address, a username, a last name, a first name and a password
-    - After the registration, an e-mail with an unique link must be sent to the registered user to verify his account
+  - Registration page:
+     - at least an email address, a username, a last name, a first name and a password
+     - After the registration, an e-mail with an unique link must be sent to the registered user to verify his account
     
  ![Alt text](screenshots/signup.png?raw=true "SignUP")
  - Login Page:
@@ -23,22 +23,22 @@ This project is part of the 1337 Khouribga Curriculum.
  ![Alt text](screenshots/edit-profile.png?raw=true "Edit")
     
  - **Search part :**
-The search engine will interrogate at least two external sources (yts and 1337x), and return the ensemble of results in thumbnails forms.
+ - The search engine will interrogate at least two external sources (yts and 1337x), and return the ensemble of results in thumbnails forms.
 
  ![Alt text](screenshots/search.png?raw=true "Search")
-The user can filter/sort or search by name for movies:
+ - The user can filter/sort or search by name for movies:
 
  ![Alt text](screenshots/search_filter.png?raw=true "Filter Search")
  
  - **Video part :**
-This section present the details of a movie
+ - This section present the details of a movie
 
  ![Alt text](screenshots/movie-detail.png?raw=true "Movie Detail")
  
-The users have the option of leaving a comment on the video, and see the list of prior comments.
+ - The users have the option of leaving a comment on the video, and see the list of prior comments.
 
  ![Alt text](screenshots/comments.png?raw=true "Movie Comments")
 
-Subtitles for the movie are also available (English + French)
+ - Subtitles for the movie are also available (English + French)
 
  ![Alt text](screenshots/subtitles.png?raw=true "Movie Subtitle")
