@@ -1,6 +1,6 @@
 ## Installing:
 
-** Inside the project folder, Open two terminals **
+**Inside the project folder, Open two terminals**
 - In the first terminal (the front server)
     1. Change the keys
      - cd client/config
