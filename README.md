@@ -2,12 +2,23 @@
 A web application that allows a registred user to research and watch movies.
 This project is part of the 1337 Khouribga Curriculum.
 
-**User part :**
-Registration page:
-Login Page:
-    - login with username/password
+### Project details:
+ - **User part :**
+ - Registration page:
+    - at least an email address, a username, a last name, a first name and a password
+    - After the registration, an e-mail with an unique link must be sent to the registered user to verify his account
+ ![Alt text](screenshots/signup.png?raw=true "SignUP")
+ - Login Page:
+    - connect with his/her username and password
+    - able to receive an email allowing him/her to re-initialize his/her password in case of forgetting his/her password 
+    - Disconnect with 1 click from any pages on the site.
     - login with Omniauth (the 42 strategy or google strategy)
-
+ ![Alt text](screenshots/login.png?raw=true "Login")
+  - User profile:
+    - Once connected the user can modify his profile or password
+    - The user must be able to select a preferred language that will be English by default
+ ![Alt text](screenshots/edit-profile.png?raw=true "Edit")
+    
 **Search part :**
 The search engine will interrogate at least two external sources (yts and 1337x), and return the ensemble of results in thumbnails forms.
 
