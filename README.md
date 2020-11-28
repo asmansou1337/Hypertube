@@ -1,6 +1,8 @@
 # Hypertube Project
 - A web application that allows a registred user to research and watch movies.
 - This project is part of the 1337 Khouribga Curriculum.
+- Made using ejs template, nodejs/express and mongodb.
+- Objectifs: Framework MVC - Omniauth - Background jobs - Internationalisation - third party API
 
 - **Installation**
   - this project run using docker
