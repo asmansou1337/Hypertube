@@ -42,3 +42,8 @@
  - Subtitles for the movie are also available (English + French)
 
  ![Alt text](screenshots/subtitles.png?raw=true "Movie Subtitle")
+ 
+ - The user can see his favorites/watchlist movies
+ ![Alt text](screenshots/mymovies.png?raw=true "Movies")
+ ![Alt text](screenshots/watched.png?raw=true "Movies")
+ 
